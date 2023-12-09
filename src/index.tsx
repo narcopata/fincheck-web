@@ -1,18 +1,9 @@
 import { render } from "preact";
-import { LocationProvider, Route, Router } from "preact-iso";
-import "./style.css"
-
-import { Home } from "./pages/Home/index.jsx";
+import { AppRouter } from "./Router";
+import "./style.css";
 
 export function App() {
-  return (
-    <LocationProvider>
-      <Router>
-        <Route path="/" component={Home} />
-        <Route path="/:id" component={() => null} />
-      </Router>
-    </LocationProvider>
-  );
+  return <AppRouter />;
 }
 
 render(<App />, document.getElementById("app"));
