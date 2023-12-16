@@ -25,8 +25,11 @@ export const Input: FunctionComponent<InputProps> = ({
         placeholder=" "
           className={cn(
             "bg-white w-full rounded-lg border border-gray-500 text-gray-800 px-3 pt-4 h-[52px] focus:border-gray-800 transition-all  placeholder-shown:pt-0 outline-none",
+            // {
+            //   "!border-red-900": !!errorMessage,
+            // },
             {
-              "!border-red-900": !!errorMessage,
+              "!border-red-900": false
             },
           )}
         <label
