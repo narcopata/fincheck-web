@@ -1,9 +1,0 @@
-.input {
-    @apply
-    bg-white w-full rounded-lg border border-gray-500 text-gray-800 px-3 pt-4 h-[52px] focus:border-gray-800 transition-all  placeholder-shown:pt-0 outline-none
-}
-
-.label {
-    @apply
-    absolute text-xs left-[13px] top-2 pointer-events-none text-gray-700 transition-all
-}

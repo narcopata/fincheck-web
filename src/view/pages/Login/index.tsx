@@ -9,18 +9,18 @@ type LoginProps = AuthLayoutProps;
 export const Login: FunctionComponent<LoginProps> = () => {
   return (
     <>
-      <header className={styles.header}>
-        <h1 className={styles["header-title"]}>Entre em sua conta</h1>
+      <header className="flex flex-col items-center gap-4">
+        <h1 className="text-center text-gray-900 text-2xl font-bold tracking-[-1px]">Entre em sua conta</h1>
 
         <p className="space-x-2">
-          <span className={styles["header-text"]}>Novo por aqui?</span>
-          <a className={styles["header-link"]} href="/access/register">
+          <span className="text-gray-700 tracking-[-0.5px]">Novo por aqui?</span>
+          <a className="text-teal-900 font-medium tracking-[-0.5px]" href="/access/register">
             Crie uma conta
           </a>
         </p>
       </header>
 
-      <form className={styles.form} action="action">
+      <form className="mt-[60px] flex flex-col gap-4;" action="action">
         <Input name="email" type="email" placeholder="E-mail" />
         <Input name="password" type="password" placeholder="Senha" />
 
