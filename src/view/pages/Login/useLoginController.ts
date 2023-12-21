@@ -10,7 +10,7 @@ const email = () =>
   s.refine(
     message(s.nonempty(s.string()), "E-mail é um campo obrigatório"),
     "email",
-    (value) => isEmail(value) || "Informe um e-mail inválido",
+    (value) => isEmail(value) || "Informe um e-mail válido",
   );
 
 const password = () =>
