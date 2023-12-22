@@ -5,6 +5,7 @@ import isEmail from "is-email";
 import { superstructResolver } from "@hookform/resolvers/superstruct";
 import * as s from "superstruct";
 import { message } from "../../../app/utils/message";
+import { authService } from "../../../app/services/auth";
 
 const email = () =>
   s.refine(
@@ -17,7 +18,7 @@ const password = () =>
   message(
     s.nonempty(
       message(
-        s.size(s.string(), 8),
+        s.size(s.string(), 8, 24),
         "A senha deve conter pelo menos 8 dígitos",
       ),
     ),
@@ -42,8 +43,10 @@ export const useRegisterController = () => {
     resolver: superstructResolver(schema),
   });
 
-  const handleSubmit = formHandleSubmit((data) => {
-    console.log(data);
+  const handleSubmit = formHandleSubmit(async (data) => {
+    const responseData = await authService.signup(data);
+
+    console.table(responseData);
   });
 
   return {

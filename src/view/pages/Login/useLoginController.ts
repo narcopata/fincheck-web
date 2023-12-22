@@ -5,6 +5,7 @@ import isEmail from "is-email";
 
 import * as s from "superstruct";
 import { message } from "../../../app/utils/message";
+import { authService } from "../../../app/services/auth";
 
 const email = () =>
   s.refine(
@@ -17,7 +18,7 @@ const password = () =>
   message(
     s.nonempty(
       message(
-        s.size(s.string(), 8),
+        s.size(s.string(), 8, 24),
         "A senha deve conter no mínimo 8 caracteres",
       ),
     ),
@@ -41,8 +42,10 @@ export const useLoginController = () => {
     resolver: superstructResolver(schema),
   });
 
-  const handleSubmit = hookFormHandleSubmit((data) => {
-    console.log(data);
+  const handleSubmit = hookFormHandleSubmit(async (data) => {
+    const responseData = await authService.signin(data);
+
+    console.table(responseData);
   });
 
   return {
