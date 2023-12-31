@@ -1,9 +1,10 @@
 import { httpClient } from "../httpClient";
 
-type Params = { email: string; password: string };
+export type SignInParams = { email: string; password: string };
+
 type Response = { accessToken: string };
 
-export const signin = async (params: Params): Promise<Response> => {
+export const signin = async (params: SignInParams): Promise<Response> => {
   const data = await httpClient
     .post("auth/signin", {
       json: params,
