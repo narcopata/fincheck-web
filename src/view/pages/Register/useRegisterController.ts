@@ -6,6 +6,9 @@ import { superstructResolver } from "@hookform/resolvers/superstruct";
 import * as s from "superstruct";
 import { message } from "../../../app/utils/message";
 import { authService } from "../../../app/services/auth";
+import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import { SignupParams } from "../../../app/services/auth/signup";
 
 const email = () =>
   s.refine(
@@ -13,13 +16,13 @@ const email = () =>
     "email",
     (value) => isEmail(value) || "Informe um e-mail válido",
   );
-
-const password = () =>
+ 
+  const password = () =>
   message(
     s.nonempty(
       message(
         s.size(s.string(), 8, 24),
-        "A senha deve conter pelo menos 8 dígitos",
+        "A senha deve conter no mínimo 8 caracteres",
       ),
     ),
     "Senha é um campo obrigatório",
@@ -43,15 +46,24 @@ export const useRegisterController = () => {
     resolver: superstructResolver(schema),
   });
 
-  const handleSubmit = formHandleSubmit(async (data) => {
-    const responseData = await authService.signup(data);
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: async (data: SignupParams) => {
+      return await authService.signup(data);
+    },
+  });
 
-    console.table(responseData);
+  const handleSubmit = formHandleSubmit(async (data) => {
+    try {
+      await mutateAsync(data);
+    } catch {
+      toast.error("Ocorreu um erro ao criar sua conta");
+    }
   });
 
   return {
     errors,
     handleSubmit,
     register,
+    isPending,
   };
 };
