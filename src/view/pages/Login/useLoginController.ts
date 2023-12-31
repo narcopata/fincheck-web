@@ -6,6 +6,10 @@ import isEmail from "is-email";
 import * as s from "superstruct";
 import { message } from "../../../app/utils/message";
 import { authService } from "../../../app/services/auth";
+import { useMutation } from "@tanstack/react-query";
+import { SignInParams } from "../../../app/services/auth/signin";
+import toast from "react-hot-toast";
+import { useAuthContext } from "../../../app/contexts/AuthContext";
 
 const email = () =>
   s.refine(
@@ -33,6 +37,8 @@ const schema = s.object({
 type FormDataType = s.Infer<typeof schema>;
 
 export const useLoginController = () => {
+  const { signin } = useAuthContext();
+
   const {
     handleSubmit: hookFormHandleSubmit,
     register,
@@ -42,15 +48,26 @@ export const useLoginController = () => {
     resolver: superstructResolver(schema),
   });
 
-  const handleSubmit = hookFormHandleSubmit(async (data) => {
-    const responseData = await authService.signin(data);
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: async (data: SignInParams) => {
+      return await authService.signin(data);
+    },
+  });
 
-    console.table(responseData);
+  const handleSubmit = hookFormHandleSubmit(async (data) => {
+    try {
+      const { accessToken } = await mutateAsync(data);
+
+      signin(accessToken);
+    } catch {
+      toast.error("Credenciais inválidas!");
+    }
   });
 
   return {
     register,
     handleSubmit,
     errors,
+    isPending,
   };
 };
