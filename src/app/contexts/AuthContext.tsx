@@ -25,10 +25,11 @@ export const AuthContextProvider: Provider<ContextType> = ({ children }) => {
     () => !!localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN),
   );
 
-  const { isError } = useQuery({
+  const { isError, isFetching, isSuccess } = useQuery({
     queryKey: QUERY_KEYS.USERS_ME,
     queryFn: () => userService.me(),
     enabled: signedIn,
+    staleTime: Infinity,
   });
 
   const signout = useCallback<ContextType["signout"]>(() => {
@@ -51,11 +52,11 @@ export const AuthContextProvider: Provider<ContextType> = ({ children }) => {
 
   const contextValue = useMemo<ContextType>(
     () => ({
-      signedIn,
+      signedIn: signedIn && isSuccess,
       signin,
       signout,
     }),
-    [],
+    [signin, signout, isSuccess, signedIn],
   );
 
   return (
