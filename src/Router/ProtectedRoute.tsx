@@ -1,19 +1,19 @@
-import { useSignal } from "@preact/signals";
 import { VNode } from "preact";
 import { Route, RouteProps, useLocation } from "preact-iso";
+import { useAuthContext } from "../app/contexts/AuthContext";
 
 export function ProtectedRoute<Props>({
   isPrivate = false,
   ...props
 }: RouteProps<Props> & Partial<Props> & { isPrivate?: boolean }): VNode {
-  const signedIn = useSignal(false);
+  const { signedIn } = useAuthContext();
   const location = useLocation();
 
-  if (!signedIn.value && isPrivate) {
+  if (!signedIn && isPrivate) {
     location.route("/access/login");
   }
 
-  if (signedIn.value && !isPrivate) {
+  if (signedIn && !isPrivate) {
     location.route("/");
   }
 

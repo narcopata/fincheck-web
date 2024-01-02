@@ -6,7 +6,7 @@ import { Button } from "../../components/Button";
 import { useRegisterController } from "./useRegisterController";
 
 export const Register: FunctionComponent = () => {
-  const { errors, handleSubmit, register } = useRegisterController();
+  const { errors, handleSubmit, register, isPending } = useRegisterController();
 
   return (
     <>
@@ -28,12 +28,33 @@ export const Register: FunctionComponent = () => {
         </p>
       </header>
 
-      <form className="mt-[59px] flex flex-col gap-4" action="action" onSubmit={handleSubmit}>
-        <Input placeholder="Nome" {...register("name")} errorMessage={errors?.name?.message} />
-        <Input type="email" placeholder="E-mail" {...register("email")} errorMessage={errors?.email?.message} />
-        <Input type="password" placeholder="Senha" {...register("password")} errorMessage={errors?.password?.message} />
+      <form
+        className="mt-[59px] flex flex-col gap-4"
+        onSubmit={handleSubmit}
+      >
+        <Input
+          placeholder="Nome"
+          {...register("name")}
+          errorMessage={errors?.name?.message}
+        />
+        <Input
+          type="email"
+          placeholder="E-mail"
+          {...register("email")}
+          errorMessage={errors?.email?.message}
+        />
+        <Input
+          type="password"
+          placeholder="Senha"
+          {...register("password")}
+          errorMessage={errors?.password?.message}
+        />
 
-        <Button type="submit" className="mt-2 bg-teal-900">
+        <Button
+          isPending={isPending}
+          type="submit"
+          className="mt-2 bg-teal-900"
+        >
           Criar conta
         </Button>
       </form>

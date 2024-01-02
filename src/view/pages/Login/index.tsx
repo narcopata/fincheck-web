@@ -8,7 +8,7 @@ import { useLoginController } from "./useLoginController";
 type LoginProps = AuthLayoutProps;
 
 export const Login: FunctionComponent<LoginProps> = () => {
-  const { handleSubmit, register, errors } = useLoginController();
+  const { handleSubmit, register, errors, isPending } = useLoginController();
 
   return (
     <>
@@ -44,7 +44,7 @@ export const Login: FunctionComponent<LoginProps> = () => {
           {...register("password")}
         />
 
-        <Button type="submit" className="mt-2 bg-teal-900">
+        <Button isPending={isPending} type="submit" className="mt-2 bg-teal-900">
           Entrar
         </Button>
       </form>
