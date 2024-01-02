@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../config/queryKeys";
 import { userService } from "../services/user";
 import toast from "react-hot-toast";
+import { LaunchScreen } from "../../view/components/LaunchScreen";
 
 type ContextType = {
   signedIn: boolean;
@@ -60,7 +61,10 @@ export const AuthContextProvider: Provider<ContextType> = ({ children }) => {
   );
 
   return (
-    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>
+      <LaunchScreen isLoading={isFetching} />
+      {!isFetching && children}
+    </AuthContext.Provider>
   );
 };
 
