@@ -16,8 +16,8 @@ const email = () =>
     "email",
     (value) => isEmail(value) || "Informe um e-mail válido",
   );
- 
-  const password = () =>
+
+const password = () =>
   message(
     s.nonempty(
       message(

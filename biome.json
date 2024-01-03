@@ -1,46 +1,43 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
-	"organizeImports": {
-		"enabled": true
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true,
-			"complexity": {
-				"useSimplifiedLogicExpression": "warn",
-				"noExcessiveCognitiveComplexity": "warn"
-			},
-			"correctness": {
-				"noNewSymbol": "warn",
-				"noUndeclaredVariables": "warn",
-				"noUnusedVariables": "warn",
-				"useHookAtTopLevel": "error"
-			},
-			"style": {
-				"useFragmentSyntax": "warn",
-				"useNamingConvention": "warn",
-				"useShorthandAssign": "warn"
-			},
-			"suspicious": {
-				"noConsoleLog": "warn",
-				"noMisrefactoredShorthandAssign": "warn"
-			},
-			"nursery": {
-				"noImplicitAnyLet": "warn",
-				"noDuplicateJsonKeys": "warn",
-				"noEmptyBlockStatements": "warn",
-				"useAwait": "warn",
-				"noUnusedImports": "warn"
-			}
-		}
-	},
-	"formatter": {
-		"formatWithErrors": true,
-		"include": [
-			"./src/**/*.ts",
-			"./src/**/*.tsx"
-		],
-		"indentStyle": "space"
-	}
+  "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "useSimplifiedLogicExpression": "warn",
+        "noExcessiveCognitiveComplexity": "warn"
+      },
+      "correctness": {
+        "noNewSymbol": "warn",
+        "noUndeclaredVariables": "warn",
+        "noUnusedVariables": "warn",
+        "useHookAtTopLevel": "error"
+      },
+      "style": {
+        "useFragmentSyntax": "warn",
+        "useNamingConvention": "warn",
+        "useShorthandAssign": "warn"
+      },
+      "suspicious": {
+        "noConsoleLog": "warn",
+        "noMisrefactoredShorthandAssign": "warn"
+      },
+      "nursery": {
+        "noImplicitAnyLet": "warn",
+        "noDuplicateJsonKeys": "warn",
+        "noEmptyBlockStatements": "warn",
+        "useAwait": "warn",
+        "noUnusedImports": "warn"
+      }
+    }
+  },
+  "formatter": {
+    "formatWithErrors": true,
+    "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+    "indentStyle": "space"
+  }
 }

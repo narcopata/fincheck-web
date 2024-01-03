@@ -1,9 +1,8 @@
 import { FunctionComponent } from "preact";
 
-type LogoProps = Partial<Pick<HTMLElement, 'className'>>;
+type LogoProps = Partial<Pick<HTMLElement, "className">>;
 
-export const Logo: FunctionComponent<LogoProps> = ({className}) => {
-  
+export const Logo: FunctionComponent<LogoProps> = ({ className }) => {
   return (
     // biome-ignore lint/a11y/noInteractiveElementToNoninteractiveRole: <explanation>
     <svg
