@@ -6,6 +6,8 @@ declare module "radix-icons" {
     className?: string;
   };
 
-  export const ChevronLeftIcon: FunctionComponent<IconProps> = AllRadixIcons.ChevronLeftIcon;
-  export const ChevronRightIcon: FunctionComponent<IconProps> = AllRadixIcons.ChevronRightIcon;
+  export const ChevronLeftIcon: FunctionComponent<IconProps> =
+    AllRadixIcons.ChevronLeftIcon;
+  export const ChevronRightIcon: FunctionComponent<IconProps> =
+    AllRadixIcons.ChevronRightIcon;
 }

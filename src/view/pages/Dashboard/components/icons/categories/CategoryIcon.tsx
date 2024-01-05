@@ -14,4 +14,4 @@ export const CategoryIcon = ({ type, category }: CategoryIconProps) => {
     ] ?? iconsMap[type].default;
 
   return <Icon />;
-}
+};

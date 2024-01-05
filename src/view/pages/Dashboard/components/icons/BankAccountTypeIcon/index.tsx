@@ -5,7 +5,7 @@ interface BankAccountTypeIconProps {
 }
 
 export function BankAccountTypeIcon({ type }: BankAccountTypeIconProps) {
-  const Icon = iconsMap[type];
+  const _icon = iconsMap[type];
 
   return <Icon />;
 }
