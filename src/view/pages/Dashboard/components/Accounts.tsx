@@ -1,4 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "radix-icons";
+import { AccountCard } from "./AccountCard";
 import { EyeIcon } from "./icons/EyeIcon";
 
 export const Accounts = () => {
@@ -41,7 +42,9 @@ export const Accounts = () => {
             </button>
           </div>
         </div>
-        <div>Conta...</div>
+        <div>
+          <AccountCard name="Nubank" balance={1000} color="#323232" />
+        </div>
       </div>
     </div>
   );
