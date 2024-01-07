@@ -5,7 +5,8 @@ interface BankAccountTypeIconProps {
 }
 
 export function BankAccountTypeIcon({ type }: BankAccountTypeIconProps) {
-  const _icon = iconsMap[type];
+  // biome-ignore lint/style/useNamingConvention: <explanation>
+  const Icon = iconsMap[type];
 
   return <Icon />;
 }
