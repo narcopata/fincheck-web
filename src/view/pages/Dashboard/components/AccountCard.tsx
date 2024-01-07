@@ -1,17 +1,20 @@
 import { FunctionComponent } from "preact";
 import { formatCurrency } from "../../../../app/utils/formatCurrency";
-import { CategoryIcon } from "./icons/categories/CategoryIcon";
+import { BankAccountTypeIcon } from "./icons/BankAccountTypeIcon";
+import { iconsMap as bankAccountTypesIconsMap } from "./icons/BankAccountTypeIcon/iconsMap";
 
 type Props = {
   color: string;
   name: string;
   balance: number;
+  type: keyof typeof bankAccountTypesIconsMap;
 };
 
 export const AccountCard: FunctionComponent<Props> = ({
   balance,
   color,
   name,
+  type,
 }) => {
   return (
     <div
@@ -21,7 +24,7 @@ export const AccountCard: FunctionComponent<Props> = ({
       }}
     >
       <div>
-        <CategoryIcon type="income" />
+        <BankAccountTypeIcon type={type} />
 
         <span className="text-gray-800 font-medium tracking-[-0.5px] mt-4 block">
           {name}
