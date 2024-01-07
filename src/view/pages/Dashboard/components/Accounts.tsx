@@ -43,7 +43,12 @@ export const Accounts = () => {
           </div>
         </div>
         <div>
-          <AccountCard name="Nubank" balance={1000} color="#323232" />
+          <AccountCard
+            name="Nubank"
+            balance={1000}
+            color="#612F74"
+            type="CASH"
+          />
         </div>
       </div>
     </div>
