@@ -28,10 +28,7 @@ export const Register: FunctionComponent = () => {
         </p>
       </header>
 
-      <form
-        className="mt-[59px] flex flex-col gap-4"
-        onSubmit={handleSubmit}
-      >
+      <form className="mt-[59px] flex flex-col gap-4" onSubmit={handleSubmit}>
         <Input
           placeholder="Nome"
           {...register("name")}

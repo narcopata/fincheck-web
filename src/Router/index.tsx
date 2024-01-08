@@ -1,5 +1,6 @@
 import { LocationProvider, Router } from "preact-iso";
 import { AuthLayout, AuthLayoutProps } from "../view/layouts/AuthLayout";
+import { Dashboard } from "../view/pages/Dashboard";
 import { Login } from "../view/pages/Login";
 import { Register } from "../view/pages/Register";
 import { ProtectedRoute } from "./ProtectedRoute";
@@ -19,12 +20,7 @@ export const AppRouter = () => {
   return (
     <LocationProvider>
       <Router>
-        <ProtectedRoute
-          path="/"
-          text="Home"
-          isPrivate
-          component={() => null}
-        />
+        <ProtectedRoute path="/" text="Home" isPrivate component={Dashboard} />
         <ProtectedRoute
           path="/access/*"
           routes={routes}

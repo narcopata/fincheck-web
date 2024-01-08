@@ -44,7 +44,11 @@ export const Login: FunctionComponent<LoginProps> = () => {
           {...register("password")}
         />
 
-        <Button isPending={isPending} type="submit" className="mt-2 bg-teal-900">
+        <Button
+          isPending={isPending}
+          type="submit"
+          className="mt-2 bg-teal-900"
+        >
           Entrar
         </Button>
       </form>

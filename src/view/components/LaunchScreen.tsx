@@ -1,7 +1,7 @@
+import { Transition } from "@headlessui/react";
 import { FunctionComponent } from "preact";
 import { Logo } from "./Logo";
 import { Spinner } from "./Spinner";
-import { Transition } from "@headlessui/react";
 
 type Props = {
   isLoading: boolean;

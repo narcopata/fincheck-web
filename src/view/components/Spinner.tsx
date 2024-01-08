@@ -1,7 +1,9 @@
 import { FunctionComponent } from "preact";
 import { cn } from "../../app/utils/cn";
 
-export const Spinner: FunctionComponent<Partial<HTMLElement>> = ({ className }) => (
+export const Spinner: FunctionComponent<Partial<HTMLElement>> = ({
+  className,
+}) => (
   <svg
     aria-hidden="true"
     className={cn(

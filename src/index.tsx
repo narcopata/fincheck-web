@@ -1,9 +1,9 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { render } from "preact";
 import { AppRouter } from "./Router";
-import "./style.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthContextProvider } from "./app/contexts/AuthContext";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import "./style.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
