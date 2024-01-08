@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { Provider, createContext } from "preact";
 import {
   useCallback,
@@ -6,12 +7,11 @@ import {
   useMemo,
   useState,
 } from "preact/hooks";
-import { LOCAL_STORAGE_KEYS } from "../config/localStorageKeys";
-import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "../config/queryKeys";
-import { userService } from "../services/user";
 import toast from "react-hot-toast";
 import { LaunchScreen } from "../../view/components/LaunchScreen";
+import { LOCAL_STORAGE_KEYS } from "../config/localStorageKeys";
+import { QUERY_KEYS } from "../config/queryKeys";
+import { userService } from "../services/user";
 
 type ContextType = {
   signedIn: boolean;
