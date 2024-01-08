@@ -33,7 +33,7 @@ export const AccountCard: FunctionComponent<Props> = ({
 
       <div>
         <span className="text-gray-800 font-medium tracking-[-0.5px] block">
-          R$ {formatCurrency(balance)}
+          {formatCurrency(balance)}
         </span>
         <small className="text-gray-600 text-sm">Saldo atual</small>
       </div>

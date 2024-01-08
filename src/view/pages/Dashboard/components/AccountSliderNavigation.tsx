@@ -1,6 +1,9 @@
 import { FunctionComponent } from "preact";
-import { ChevronLeftIcon, ChevronRightIcon } from "radix-icons";
 import { useSwiper } from "swiper/react";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "../../../../types/radix-icons";
 
 export const AccountSliderNavigation: FunctionComponent = () => {
   const swipe = useSwiper();
