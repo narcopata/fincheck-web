@@ -1,5 +1,7 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "radix-icons";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { AccountCard } from "./AccountCard";
+import { AccountSliderNavigation } from "./AccountSliderNavigation";
 import { EyeIcon } from "./icons/EyeIcon";
 
 export const Accounts = () => {
@@ -22,33 +24,28 @@ export const Accounts = () => {
       </div>
 
       <div className="flex flex-1 flex-col justify-end">
-        <div className="flex items-center justify-between">
-          <strong className="text-white tracking-[-1px] text-lg font-bold">
-            Minhas contas
-          </strong>
-
-          <div>
-            <button
-              type="button"
-              className="py-3 pl-2.5 pr-3.5 rounded-full enabled:hover:bg-black/10 transition-colors disabled:opacity-40"
-            >
-              <ChevronLeftIcon className="text-white w-6 h-6" />
-            </button>
-            <button
-              type="button"
-              className="py-3 pl-3.5 pr-2.5 rounded-full enabled:hover:bg-black/10 transition-colors disabled:opacity-40"
-            >
-              <ChevronRightIcon className="text-white w-6 h-6" />
-            </button>
-          </div>
-        </div>
         <div>
-          <AccountCard
-            name="Nubank"
-            balance={1000}
-            color="#612F74"
-            type="CASH"
-          />
+          <Swiper spaceBetween={16} slidesPerView={2.2}>
+            <div
+              className="flex items-center justify-between mb-4"
+              slot="container-start"
+            >
+              <strong className="text-white tracking-[-1px] text-lg font-bold">
+                Minhas contas
+              </strong>
+              <AccountSliderNavigation />
+            </div>
+            <div>
+              <SwiperSlide>
+                <AccountCard
+                  name="Nubank"
+                  balance={1000}
+                  color="#612F74"
+                  type="CASH"
+                />
+              </SwiperSlide>
+            </div>
+          </Swiper>
         </div>
       </div>
     </div>
