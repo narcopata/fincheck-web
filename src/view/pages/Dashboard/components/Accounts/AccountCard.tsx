@@ -1,7 +1,7 @@
-import { FunctionComponent } from "preact";
-import { formatCurrency } from "../../../../app/utils/formatCurrency";
-import { BankAccountTypeIcon } from "./icons/BankAccountTypeIcon";
-import { iconsMap as bankAccountTypesIconsMap } from "./icons/BankAccountTypeIcon/iconsMap";
+import type { FunctionComponent } from "preact";
+import { formatCurrency } from "../../../../../app/utils/formatCurrency";
+import { BankAccountTypeIcon } from "../icons/BankAccountTypeIcon";
+import type { iconsMap as bankAccountTypesIconsMap } from "../icons/BankAccountTypeIcon/iconsMap";
 
 type Props = {
   color: string;
