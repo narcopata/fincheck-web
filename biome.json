@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.5.0/schema.json",
   "organizeImports": {
     "enabled": true
   },
@@ -15,7 +15,8 @@
         "noNewSymbol": "warn",
         "noUndeclaredVariables": "warn",
         "noUnusedVariables": "warn",
-        "useHookAtTopLevel": "error"
+        "useHookAtTopLevel": "error",
+        "useExhaustiveDependencies": "warn"
       },
       "style": {
         "useFragmentSyntax": "warn",
@@ -27,17 +28,18 @@
         "noMisrefactoredShorthandAssign": "warn"
       },
       "nursery": {
-        "noImplicitAnyLet": "warn",
         "noDuplicateJsonKeys": "warn",
         "noEmptyBlockStatements": "warn",
         "useAwait": "warn",
-        "noUnusedImports": "warn"
+        "noUnusedImports": "warn",
+        "useImportType": "warn",
+        "useShorthandFunctionType": "warn"
       }
     }
   },
   "formatter": {
     "formatWithErrors": true,
-    "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+    "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/.js"],
     "indentStyle": "space"
   }
 }
