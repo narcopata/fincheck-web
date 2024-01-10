@@ -1,5 +1,5 @@
 import { Transition } from "@headlessui/react";
-import { FunctionComponent } from "preact";
+import type { FunctionComponent } from "preact";
 import { Logo } from "./Logo";
 import { Spinner } from "./Spinner";
 

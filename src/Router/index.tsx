@@ -1,5 +1,5 @@
 import { LocationProvider, Router } from "preact-iso";
-import { AuthLayout, AuthLayoutProps } from "../view/layouts/AuthLayout";
+import { AuthLayout, type AuthLayoutProps } from "../view/layouts/AuthLayout";
 import { Dashboard } from "../view/pages/Dashboard";
 import { Login } from "../view/pages/Login";
 import { Register } from "../view/pages/Register";

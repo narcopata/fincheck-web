@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Provider, createContext } from "preact";
+import { type Provider, createContext } from "preact";
 import {
   useCallback,
   useContext,
