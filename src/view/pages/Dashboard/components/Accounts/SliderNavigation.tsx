@@ -10,7 +10,7 @@ type Props = {
   isEnd: boolean;
 };
 
-export const AccountSliderNavigation: FunctionComponent<Props> = ({
+export const SliderNavigation: FunctionComponent<Props> = ({
   isBeginning,
   isEnd,
 }) => {
