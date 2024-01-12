@@ -20,7 +20,7 @@
       },
       "style": {
         "useFragmentSyntax": "warn",
-        "useNamingConvention": "warn",
+        "useNamingConvention": "off",
         "useShorthandAssign": "warn"
       },
       "suspicious": {
