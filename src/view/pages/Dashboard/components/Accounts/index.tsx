@@ -2,7 +2,7 @@ import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EyeIcon } from "../icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
-import { AccountSliderNavigation } from "./SliderNavigation";
+import { SliderNavigation } from "./SliderNavigation";
 import { useAccountsController } from "./useAccountsController";
 
 export const Accounts = () => {
@@ -45,7 +45,7 @@ export const Accounts = () => {
               <strong className="text-white tracking-[-1px] text-lg font-bold">
                 Minhas contas
               </strong>
-              <AccountSliderNavigation {...slider} />
+              <SliderNavigation {...slider} />
             </div>
             <div>
               <SwiperSlide>
