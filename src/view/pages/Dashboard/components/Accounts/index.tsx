@@ -26,7 +26,7 @@ export const Accounts = () => {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col justify-end">
+      <div className="flex flex-1 flex-col justify-end mt-10 md:mt-0">
         <div>
           <Swiper
             spaceBetween={16}
