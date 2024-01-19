@@ -6,6 +6,7 @@ interface ColorIconProps {
 export function ColorIcon({ color, bg }: ColorIconProps) {
   return (
     <svg
+      role="document"
       width="35"
       height="34"
       viewBox="0 0 35 34"

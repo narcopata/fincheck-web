@@ -1,6 +1,7 @@
 export function IncomeIcon() {
   return (
     <svg
+      role="document"
       width="24"
       height="24"
       viewBox="0 0 24 24"
