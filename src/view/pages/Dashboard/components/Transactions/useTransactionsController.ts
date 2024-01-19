@@ -5,6 +5,6 @@ export const useTransactionsController = () => {
 
   return {
     areValuesVisible,
-    // isLoading: true,
+    isLoading: true,
   };
 };
