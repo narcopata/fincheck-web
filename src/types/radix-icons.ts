@@ -12,3 +12,4 @@ export const ChevronRightIcon: FunctionComponent<IconProps> =
   AllRadixIcons.ChevronRightIcon;
 export const ChevronDownIcon: FunctionComponent<IconProps> =
   AllRadixIcons.ChevronDownIcon;
+export const PlusIcon: FunctionComponent<IconProps> = AllRadixIcons.PlusIcon;
