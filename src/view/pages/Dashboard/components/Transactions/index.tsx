@@ -59,10 +59,14 @@ export const Transactions = () => {
             </div>
           </div>
 
-          <span className="tracking-[-0.5px] font-medium">
-            - {formatCurrency(123)}
-          </span>
-        </div>
+              <span
+                className={cn(
+                  "tracking-[-0.5px] font-medium",
+                  !areValuesVisible && "blur-sm",
+                )}
+              >
+                - {formatCurrency(123)}
+              </span>
 
         <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
           <div className="flex-1 flex items-center">
@@ -76,11 +80,14 @@ export const Transactions = () => {
             </div>
           </div>
 
-          <span className="tracking-[-0.5px] font-medium">
-            {formatCurrency(123)}
-          </span>
-        </div>
-      </main>
+              <span
+                className={cn(
+                  "tracking-[-0.5px] font-medium",
+                  !areValuesVisible && "blur-sm",
+                )}
+              >
+                {formatCurrency(123)}
+              </span>
     </div>
   );
 };
