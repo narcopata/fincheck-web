@@ -1,4 +1,4 @@
-import { ComponentProps } from "preact";
+import type { ComponentProps } from "preact";
 
 import { useComputed } from "@preact/signals";
 import { forwardRef } from "preact/compat";

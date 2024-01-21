@@ -6,7 +6,6 @@ interface CategoryIconProps {
 }
 
 export const CategoryIcon = ({ type, category }: CategoryIconProps) => {
-  // biome-ignore lint/style/useNamingConvention: <explanation>
   const Icon =
     iconsMap[type][
       (category as keyof (typeof iconsMap.expense | typeof iconsMap.income)) ??

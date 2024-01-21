@@ -2,6 +2,7 @@ export function Fun() {
   return (
     <svg
       width="44"
+      role="document"
       height="44"
       viewBox="0 0 44 44"
       fill="none"

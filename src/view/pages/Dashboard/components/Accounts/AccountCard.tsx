@@ -1,7 +1,9 @@
-import { FunctionComponent } from "preact";
-import { formatCurrency } from "../../../../app/utils/formatCurrency";
-import { BankAccountTypeIcon } from "./icons/BankAccountTypeIcon";
-import { iconsMap as bankAccountTypesIconsMap } from "./icons/BankAccountTypeIcon/iconsMap";
+import type { FunctionComponent } from "preact";
+import { cn } from "../../../../../app/utils/cn";
+import { formatCurrency } from "../../../../../app/utils/formatCurrency";
+import { useDashboard } from "../../contexts/Dashboard/useDashboard";
+import { BankAccountTypeIcon } from "../icons/BankAccountTypeIcon";
+import type { iconsMap as bankAccountTypesIconsMap } from "../icons/BankAccountTypeIcon/iconsMap";
 
 type Props = {
   color: string;
@@ -16,6 +18,8 @@ export const AccountCard: FunctionComponent<Props> = ({
   name,
   type,
 }) => {
+  const { areValuesVisible } = useDashboard();
+
   return (
     <div
       className="p-4 bg-white rounded-2xl h-[200px] flex flex-col justify-between border-b-4 border-teal-950"
@@ -32,7 +36,12 @@ export const AccountCard: FunctionComponent<Props> = ({
       </div>
 
       <div>
-        <span className="text-gray-800 font-medium tracking-[-0.5px] block">
+        <span
+          className={cn(
+            "text-gray-800 font-medium tracking-[-0.5px] block",
+            !areValuesVisible && "blur-sm",
+          )}
+        >
           {formatCurrency(balance)}
         </span>
         <small className="text-gray-600 text-sm">Saldo atual</small>

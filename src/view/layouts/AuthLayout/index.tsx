@@ -1,4 +1,4 @@
-import { FunctionComponent } from "preact";
+import type { FunctionComponent } from "preact";
 
 import { Route, Router } from "preact-iso";
 import { Illustration as IllustrationImage } from "../../../assets";

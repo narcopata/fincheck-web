@@ -7,7 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import * as s from "superstruct";
 import { authService } from "../../../app/services/auth";
-import { SignupParams } from "../../../app/services/auth/signup";
+import type { SignupParams } from "../../../app/services/auth/signup";
 import { message } from "../../../app/utils/message";
 
 const email = () =>

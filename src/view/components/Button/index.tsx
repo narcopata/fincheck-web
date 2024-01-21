@@ -1,4 +1,4 @@
-import { ComponentProps, FunctionComponent } from "preact";
+import type { ComponentProps, FunctionComponent } from "preact";
 
 import { cn } from "../../../app/utils/cn";
 import { Spinner } from "../Spinner";

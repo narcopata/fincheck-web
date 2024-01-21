@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import * as s from "superstruct";
 import { useAuthContext } from "../../../app/contexts/AuthContext";
 import { authService } from "../../../app/services/auth";
-import { SignInParams } from "../../../app/services/auth/signin";
+import type { SignInParams } from "../../../app/services/auth/signin";
 import { message } from "../../../app/utils/message";
 
 const email = () =>

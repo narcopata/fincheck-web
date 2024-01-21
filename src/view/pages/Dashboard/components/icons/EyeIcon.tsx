@@ -5,6 +5,7 @@ interface EyeIconProps {
 export function EyeIcon({ open }: EyeIconProps) {
   return (
     <svg
+      role="document"
       width="24"
       height="24"
       viewBox="0 0 24 24"

@@ -1,6 +1,7 @@
 export function CheckingIcon() {
   return (
     <svg
+      role="document"
       width="44"
       height="44"
       viewBox="0 0 44 44"

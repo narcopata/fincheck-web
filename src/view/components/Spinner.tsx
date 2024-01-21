@@ -1,4 +1,4 @@
-import { FunctionComponent } from "preact";
+import type { FunctionComponent } from "preact";
 import { cn } from "../../app/utils/cn";
 
 export const Spinner: FunctionComponent<Partial<HTMLElement>> = ({
