@@ -21,7 +21,9 @@ type ContextType = {
 
 export const AuthContext = createContext<ContextType | null>(null);
 
-export const AuthContextProvider: Provider<ContextType> = ({ children }) => {
+export const AuthContextProvider: Provider<ContextType | null> = ({
+  children,
+}) => {
   const [signedIn, setSignedIn] = useState(
     () => !!localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN),
   );
