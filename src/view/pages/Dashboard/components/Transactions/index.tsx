@@ -2,8 +2,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { MONTHS } from "../../../../../app/constants/months";
 import { ChevronDownIcon } from "../../../../../types/radix-icons";
 
+import { useMemo } from "preact/hooks";
 import { cn } from "../../../../../app/utils/cn";
 import { formatCurrency } from "../../../../../app/utils/formatCurrency";
+import { EmptyState } from "../../../../../assets";
 import { Spinner } from "../../../../components/Spinner";
 import { FilterIcon } from "../icons/FilterIcon";
 import { TransactionsIcon } from "../icons/TransactionsIcon";
@@ -13,16 +15,23 @@ import { SliderOption } from "./SliderOption";
 import { useTransactionsController } from "./useTransactionsController";
 
 export const Transactions = () => {
-  const { areValuesVisible, isLoading } = useTransactionsController();
+  const { areValuesVisible, isFirstLoading, isNextLoading, transactions } =
+    useTransactionsController();
+
+  const hasTransactions = useMemo(
+    () => transactions.length > 0,
+    [transactions.length],
+  );
 
   return (
     <div className="bg-gray-100 rounded-2xl w-full h-full p-10 flex flex-col">
-      {isLoading && (
+      {isFirstLoading && (
         <div className="w-full h-full flex items-center justify-center">
           <Spinner className="text-teal-950 fill-white w-10 h-10" />
         </div>
       )}
-      {!isLoading && (
+
+      {!isFirstLoading && (
         <>
           <header>
             <div>
@@ -58,53 +67,71 @@ export const Transactions = () => {
             </div>
           </header>
 
-          <main className="mt-4 space-y-2 max-h-full flex-1 overflow-y-auto h-64">
-            <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
-              <div className="flex-1 flex items-center">
-                <CategoryIcon type="expense" />
-
-                <div>
-                  <strong className="font-bold tracking-[-0.5px] block">
-                    Almoço
-                  </strong>
-                  <span className="text-sm text-gray-600">04/06/2023</span>
-                </div>
-              </div>
-
-              <span
-                className={cn(
-                  "tracking-[-0.5px] font-medium",
-                  !areValuesVisible && "blur-sm",
+          <main className="mt-4 space-y-2 flex-1">
+            {(!hasTransactions && !isNextLoading) && (
+              <div className="flex flex-col items-center justify-center h-full">
+                {isNextLoading && <Spinner />}
+                {!hasTransactions && (
+                  <>
+                    <img src={EmptyState} alt="empty state" />
+                    <p className="text-gray-700">
+                      Não encontramos nenhuma transação
+                    </p>
+                  </>
                 )}
-              >
-                - {formatCurrency(123)}
-              </span>
-            </div>
-
-            <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
-              <div className="flex-1 flex items-center">
-                <CategoryIcon type="income" />
-
-                <div>
-                  <strong className="font-bold tracking-[-0.5px] block">
-                    Almoço
-                  </strong>
-                  <span className="text-sm text-gray-600">04/06/2023</span>
-                </div>
               </div>
+            )}
+            {hasTransactions && !isNextLoading && (
+              <>
+                <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+                  <div className="flex-1 flex items-center">
+                    <CategoryIcon type="expense" />
 
-              <span
-                className={cn(
-                  "tracking-[-0.5px] font-medium",
-                  !areValuesVisible && "blur-sm",
-                )}
-              >
-                {formatCurrency(123)}
-              </span>
-            </div>
+                    <div>
+                      <strong className="font-bold tracking-[-0.5px] block">
+                        Almoço
+                      </strong>
+                      <span className="text-sm text-gray-600">04/06/2023</span>
+                    </div>
+                  </div>
+
+                  <span
+                    className={cn(
+                      "tracking-[-0.5px] font-medium",
+                      !areValuesVisible && "blur-sm",
+                    )}
+                  >
+                    - {formatCurrency(123)}
+                  </span>
+                </div>
+
+                <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+                  <div className="flex-1 flex items-center">
+                    <CategoryIcon type="income" />
+
+                    <div>
+                      <strong className="font-bold tracking-[-0.5px] block">
+                        Almoço
+                      </strong>
+                      <span className="text-sm text-gray-600">04/06/2023</span>
+                    </div>
+                  </div>
+
+                  <span
+                    className={cn(
+                      "tracking-[-0.5px] font-medium",
+                      !areValuesVisible && "blur-sm",
+                    )}
+                  >
+                    {formatCurrency(123)}
+                  </span>
+                </div>
+              </>
+            )}
           </main>
         </>
       )}
+      ;
     </div>
   );
 };
