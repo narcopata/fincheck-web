@@ -11,7 +11,12 @@
     "skipLibCheck": true,
     "paths": {
       "react": ["./node_modules/preact/compat/"],
-      "react-dom": ["./node_modules/preact/compat/"]
+      "react-dom": ["./node_modules/preact/compat/"],
+      "@components/*": ["./src/view/components/*"],
+      "@config/*": ["./src/app/config/*"],
+      "@constants/*": ["./src/app/constants/*"],
+      "@services/*": ["./src/app/services/*"],
+      "@utils/*": ["./src/app/utils/*"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
