@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { ChevronDownIcon } from "../../../../../types/radix-icons";
+// import { ChevronDownIcon } from "../../../../../assets/icons/radix-icons";
 
 import { EmptyState } from "@assets";
 import { Spinner } from "@components/Spinner";
@@ -8,6 +8,7 @@ import { cn } from "@utils/cn";
 import { formatCurrency } from "@utils/formatCurrency";
 import { useMemo } from "preact/hooks";
 
+import { ChevronDownIcon } from "@assets/icons/radix-icons";
 import { FilterIcon } from "../icons/FilterIcon";
 import { TransactionsIcon } from "../icons/TransactionsIcon";
 import { CategoryIcon } from "../icons/categories/CategoryIcon";

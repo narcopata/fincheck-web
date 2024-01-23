@@ -1,9 +1,6 @@
+import { ChevronLeftIcon, ChevronRightIcon } from "@assets/icons/radix-icons";
 import type { FunctionComponent } from "preact";
 import { useSwiper } from "swiper/react";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "../../../../../types/radix-icons";
 
 type Props = {
   isBeginning: boolean;

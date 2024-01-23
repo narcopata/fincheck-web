@@ -2,8 +2,9 @@ import { Spinner } from "@components/Spinner";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import { PlusIcon } from "@assets/icons/radix-icons";
 import { cn } from "@utils/cn";
-import { PlusIcon } from "../../../../../types/radix-icons";
+// import { PlusIcon } from "../../../../../assets/icons/radix-icons";
 import { EyeIcon } from "../icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
 import { SliderNavigation } from "./SliderNavigation";
