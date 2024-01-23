@@ -20,9 +20,12 @@ export const SliderOption: FunctionComponent<Props> = ({
     <button
       onClick={() => swiper.slideTo(index)}
       type="button"
-      className={cn("text-sm text-gray-800 tracking-[-0.5px] font-medium", {
-        "bg-white": isActive,
-      })}
+      className={cn(
+        "w-full rounded-full h-12 text-sm text-gray-800 tracking-[-0.5px] font-medium",
+        {
+          "bg-white": isActive,
+        },
+      )}
     >
       {monthsAbbreviatedPtBr[month]}
     </button>
