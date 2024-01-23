@@ -1,5 +1,4 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-// import { ChevronDownIcon } from "../../../../../assets/icons/radix-icons";
 
 import { EmptyState } from "@assets";
 import { Spinner } from "@components/Spinner";
@@ -35,7 +34,7 @@ export const Transactions = () => {
       {!isFirstLoading && (
         <>
           <header>
-            <div>
+            <div className="flex items-center justify-between">
               <button className="flex items-center gap-2" type="button">
                 <TransactionsIcon />
                 <span className="text-sm text-gray-800 tracking-[-0.5px] font-medium">
