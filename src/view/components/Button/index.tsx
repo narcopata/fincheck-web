@@ -1,6 +1,7 @@
 import type { ComponentProps, FunctionComponent } from "preact";
 
-import { cn } from "../../../app/utils/cn";
+import { cn } from "@utils/cn";
+
 import { Spinner } from "../Spinner";
 
 type ButtonProps = ComponentProps<"button"> & {

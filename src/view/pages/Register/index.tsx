@@ -1,8 +1,8 @@
 import type { FunctionComponent } from "preact";
 
-import { Input } from "../../components/Input";
+import { Button } from "@components/Button";
+import { Input } from "@components/Input";
 
-import { Button } from "../../components/Button";
 import { useRegisterController } from "./useRegisterController";
 
 export const Register: FunctionComponent = () => {

@@ -1,8 +1,9 @@
 import type { FunctionComponent } from "preact";
-import { Button } from "../../components/Button";
-import { Input } from "../../components/Input";
+
 import type { AuthLayoutProps } from "../../layouts/AuthLayout";
 
+import { Button } from "@components/Button";
+import { Input } from "@components/Input";
 import { useLoginController } from "./useLoginController";
 
 type LoginProps = AuthLayoutProps;

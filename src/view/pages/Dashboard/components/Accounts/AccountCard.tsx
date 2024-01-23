@@ -1,6 +1,6 @@
+import { cn } from "@utils/cn";
+import { formatCurrency } from "@utils/formatCurrency";
 import type { FunctionComponent } from "preact";
-import { cn } from "../../../../../app/utils/cn";
-import { formatCurrency } from "../../../../../app/utils/formatCurrency";
 import { useDashboard } from "../../contexts/Dashboard/useDashboard";
 import { BankAccountTypeIcon } from "../icons/BankAccountTypeIcon";
 import type { iconsMap as bankAccountTypesIconsMap } from "../icons/BankAccountTypeIcon/iconsMap";
