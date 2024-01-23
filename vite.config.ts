@@ -14,6 +14,7 @@ export default defineConfig({
       "@constants": "/src/app/constants",
       "@services": "/src/app/services",
       "@utils": "/src/app/utils",
+      "@assets": "/src/assets"
     }
   }
 });

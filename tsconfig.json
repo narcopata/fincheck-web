@@ -16,7 +16,9 @@
       "@config/*": ["./src/app/config/*"],
       "@constants/*": ["./src/app/constants/*"],
       "@services/*": ["./src/app/services/*"],
-      "@utils/*": ["./src/app/utils/*"]
+      "@utils/*": ["./src/app/utils/*"],
+      "@assets": ["./src/assets"],
+      "@assets/*": ["./src/assets/*"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
