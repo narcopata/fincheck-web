@@ -1,12 +1,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ChevronDownIcon } from "../../../../../types/radix-icons";
 
+import { EmptyState } from "@assets";
 import { Spinner } from "@components/Spinner";
 import { MONTHS } from "@constants/months";
 import { cn } from "@utils/cn";
 import { formatCurrency } from "@utils/formatCurrency";
 import { useMemo } from "preact/hooks";
-import { EmptyState } from "../../../../../assets";
+
 import { FilterIcon } from "../icons/FilterIcon";
 import { TransactionsIcon } from "../icons/TransactionsIcon";
 import { CategoryIcon } from "../icons/categories/CategoryIcon";

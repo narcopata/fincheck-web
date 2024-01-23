@@ -1,8 +1,8 @@
 import type { FunctionComponent } from "preact";
 
+import { Illustration as IllustrationImage } from "@assets";
 import { Logo } from "@components/Logo";
 import { Route, Router } from "preact-iso";
-import { Illustration as IllustrationImage } from "../../../assets";
 
 export type AuthLayoutProps = {
   routes: Parameters<typeof Route>[0][];
