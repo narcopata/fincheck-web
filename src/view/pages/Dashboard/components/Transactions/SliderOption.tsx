@@ -1,7 +1,7 @@
+import { monthsAbbreviatedPtBr } from "@constants/months";
+import { cn } from "@utils/cn";
 import type { FunctionComponent } from "preact";
 import { useSwiper } from "swiper/react";
-import { monthsAbbreviatedPtBr } from "../../../../../app/constants/months";
-import { cn } from "../../../../../app/utils/cn";
 
 type Props = {
   isActive: boolean;

@@ -1,12 +1,14 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { MONTHS } from "../../../../../app/constants/months";
-import { ChevronDownIcon } from "../../../../../types/radix-icons";
+// import { ChevronDownIcon } from "../../../../../assets/icons/radix-icons";
 
+import { EmptyState } from "@assets";
+import { Spinner } from "@components/Spinner";
+import { MONTHS } from "@constants/months";
+import { cn } from "@utils/cn";
+import { formatCurrency } from "@utils/formatCurrency";
 import { useMemo } from "preact/hooks";
-import { cn } from "../../../../../app/utils/cn";
-import { formatCurrency } from "../../../../../app/utils/formatCurrency";
-import { EmptyState } from "../../../../../assets";
-import { Spinner } from "../../../../components/Spinner";
+
+import { ChevronDownIcon } from "@assets/icons/radix-icons";
 import { FilterIcon } from "../icons/FilterIcon";
 import { TransactionsIcon } from "../icons/TransactionsIcon";
 import { CategoryIcon } from "../icons/categories/CategoryIcon";
@@ -30,7 +32,6 @@ export const Transactions = () => {
           <Spinner className="text-teal-950 fill-white w-10 h-10" />
         </div>
       )}
-
       {!isFirstLoading && (
         <>
           <header>
@@ -68,7 +69,7 @@ export const Transactions = () => {
           </header>
 
           <main className="mt-4 space-y-2 flex-1">
-            {(!hasTransactions && !isNextLoading) && (
+            {!(hasTransactions || isNextLoading) && (
               <div className="flex flex-col items-center justify-center h-full">
                 {isNextLoading && <Spinner />}
                 {!hasTransactions && (

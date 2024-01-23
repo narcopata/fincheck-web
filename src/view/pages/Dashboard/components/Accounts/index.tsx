@@ -1,8 +1,10 @@
+import { Spinner } from "@components/Spinner";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { cn } from "../../../../../app/utils/cn";
-import { PlusIcon } from "../../../../../types/radix-icons";
-import { Spinner } from "../../../../components/Spinner";
+
+import { PlusIcon } from "@assets/icons/radix-icons";
+import { cn } from "@utils/cn";
+// import { PlusIcon } from "../../../../../assets/icons/radix-icons";
 import { EyeIcon } from "../icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
 import { SliderNavigation } from "./SliderNavigation";

@@ -3,12 +3,12 @@ import { useForm } from "react-hook-form";
 import isEmail from "is-email";
 
 import { superstructResolver } from "@hookform/resolvers/superstruct";
+import { authService } from "@services/auth";
+import type { SignupParams } from "@services/auth/signup";
 import { useMutation } from "@tanstack/react-query";
+import { message } from "@utils/message";
 import toast from "react-hot-toast";
 import * as s from "superstruct";
-import { authService } from "../../../app/services/auth";
-import type { SignupParams } from "../../../app/services/auth/signup";
-import { message } from "../../../app/utils/message";
 
 const email = () =>
   s.refine(

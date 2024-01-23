@@ -1,8 +1,5 @@
+import { ChevronLeftIcon, ChevronRightIcon } from "@assets/icons/radix-icons";
 import { useSwiper } from "swiper/react";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "../../../../../types/radix-icons";
 
 export const SliderNavigation = () => {
   const _swiper = useSwiper();

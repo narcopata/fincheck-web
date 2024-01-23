@@ -7,4 +7,14 @@ export default defineConfig({
   server: {
     open: true,
   },
+  resolve: {
+    alias: {
+      "@components": "/src/view/components",
+      "@config": "/src/app/config",
+      "@constants": "/src/app/constants",
+      "@services": "/src/app/services",
+      "@utils": "/src/app/utils",
+      "@assets": "/src/assets"
+    }
+  }
 });

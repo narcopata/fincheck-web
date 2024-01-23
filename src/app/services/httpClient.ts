@@ -1,5 +1,5 @@
+import { LOCAL_STORAGE_KEYS } from "@config/localStorageKeys";
 import ky from "ky";
-import { LOCAL_STORAGE_KEYS } from "../config/localStorageKeys";
 
 export const httpClient = ky.create({
   prefixUrl: import.meta.env.VITE_API_URL,

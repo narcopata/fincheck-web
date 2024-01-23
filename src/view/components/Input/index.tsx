@@ -4,7 +4,7 @@ import { useComputed } from "@preact/signals";
 import { forwardRef } from "preact/compat";
 
 import { CrossCircledIcon } from "@radix-ui/react-icons";
-import { cn } from "../../../app/utils/cn";
+import { cn } from "@utils/cn";
 
 type InputProps = ComponentProps<"input"> & {
   name: string;
