@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.5.2/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
   "organizeImports": {
     "enabled": true
   },
@@ -35,11 +35,15 @@
         "useImportType": "warn",
         "useShorthandFunctionType": "warn"
       }
-    }
+    },
+    "include": ["./src/**/*.ts", "./src/**/*.tsx"]
+  },
+  "files": {
+    "include": ["./src/**/*.ts", "./src/**/*.tsx"]
   },
   "formatter": {
     "formatWithErrors": true,
-    "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/.js"],
+    "include": ["./src/**/*.ts", "./src/**/*.tsx"],
     "indentStyle": "space"
   }
 }
