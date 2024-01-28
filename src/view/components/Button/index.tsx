@@ -21,7 +21,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
       {...props}
       disabled={disabled || isPending}
       className={cn(
-        "hover:bg-teal-800 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed text-white px-6 h-12 rounded-2xl font-medium transition-all flex items-center justify-center",
+        "bg-teal-900 hover:bg-teal-800 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed text-white px-6 h-12 rounded-2xl font-medium transition-all flex items-center justify-center",
         className,
       )}
       type={type}

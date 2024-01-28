@@ -90,8 +90,9 @@ export const FiltersModal: FunctionComponent<Props> = ({ open, onClose }) => {
           </button>
         </div>
 
-        <Button className="w-full mt-10 " />
-      </Modal.Content>
+        <Button className="w-full mt-10">
+          Aplicar Filtros
+        </Button>
     </Modal.Root>
   );
 };
