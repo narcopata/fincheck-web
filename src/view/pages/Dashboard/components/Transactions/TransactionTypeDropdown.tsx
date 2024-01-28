@@ -5,12 +5,10 @@ import { ExpensesIcon } from "../icons/ExpensesIcon";
 import { IncomeIcon } from "../icons/IncomeIcon";
 import { TransactionsIcon } from "../icons/TransactionsIcon";
 
-// type Props = {};
-
 export const TransactionTypeDropdown: FunctionComponent = () => {
   return (
     <DropDownMenu.Root>
-      <DropDownMenu.Trigger>
+      <DropDownMenu.Trigger asChild>
         <button className="flex items-center gap-2" type="button">
           <TransactionsIcon />
           <span className="text-sm text-gray-800 tracking-[-0.5px] font-medium">
@@ -37,4 +35,3 @@ export const TransactionTypeDropdown: FunctionComponent = () => {
     </DropDownMenu.Root>
   );
 };
-/*  */
