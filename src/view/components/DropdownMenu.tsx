@@ -8,13 +8,17 @@ type ContentProps = RdxDropdownMenu.DropdownMenuContentProps &
 type ItemProps = RdxDropdownMenu.DropdownMenuItemProps &
   Partial<Pick<HTMLElement, "className" | "onselect">>;
 
+type TriggerProps = RdxDropdownMenu.DropdownMenuTriggerProps & {
+  asChild?: boolean;
+};
+
 const DropDownMenuRoot: FunctionComponent = ({ children }) => {
   return <RdxDropdownMenu.Root>{children}</RdxDropdownMenu.Root>;
 };
 
-const DropDownMenuTrigger: FunctionComponent = ({ children }) => {
+const DropDownMenuTrigger: FunctionComponent<TriggerProps> = ({ children, asChild }) => {
   return (
-    <RdxDropdownMenu.Trigger className="outline-none">
+    <RdxDropdownMenu.Trigger asChild={asChild} className="outline-none">
       {children}
     </RdxDropdownMenu.Trigger>
   );
