@@ -1,10 +1,9 @@
 import * as AllRadixIcons from "@radix-ui/react-icons";
 import type { FunctionComponent } from "preact";
-import type { SVGProps } from "preact/compat";
+import type { HTMLAttributes, SVGProps } from "preact/compat";
 
-export type IconProps = SVGProps<SVGSVGElement> & {
-  className?: string;
-};
+export type IconProps = SVGProps<SVGSVGElement> &
+  Pick<HTMLAttributes<HTMLElement>, "className">;
 
 export const ChevronLeftIcon: FunctionComponent<IconProps> =
   AllRadixIcons.ChevronLeftIcon;
