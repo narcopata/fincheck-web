@@ -2,7 +2,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { cn } from "@utils/cn";
 import type { FunctionComponent } from "preact";
 import { Content } from "./Content";
-import { Header, HeaderProps } from "./Header";
+import { Header, type HeaderProps } from "./Header";
 
 type Props = {
   open: boolean;
@@ -38,4 +38,4 @@ export const Modal = {
   Content: Content,
 };
 
-export { Props as ModalRootProps, HeaderProps as ModalHeaderProps };
+export type { Props as ModalRootProps, HeaderProps as ModalHeaderProps };

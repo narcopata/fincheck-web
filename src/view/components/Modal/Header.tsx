@@ -46,4 +46,4 @@ export const Header: FunctionComponent<Props> = ({
   );
 };
 
-export { BaseProps as HeaderProps };
+export type { BaseProps as HeaderProps };
