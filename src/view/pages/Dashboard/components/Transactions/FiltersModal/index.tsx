@@ -16,10 +16,7 @@ const accounts = new Set<{ id: string; title: string }>();
 accounts.add({ title: "Nu", id: "100" });
 
 export const FiltersModal: FunctionComponent<Props> = ({ open, onClose }) => {
-  const {
-    filtersData,
-    dispatchFilters,
-  } = useFiltersModal();
+  const { filtersData, dispatchFilters } = useFiltersModal();
 
   return (
     <Modal.Root open={open}>
