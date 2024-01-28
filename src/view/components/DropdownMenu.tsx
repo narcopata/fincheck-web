@@ -16,7 +16,10 @@ const DropDownMenuRoot: FunctionComponent = ({ children }) => {
   return <RdxDropdownMenu.Root>{children}</RdxDropdownMenu.Root>;
 };
 
-const DropDownMenuTrigger: FunctionComponent<TriggerProps> = ({ children, asChild }) => {
+const DropDownMenuTrigger: FunctionComponent<TriggerProps> = ({
+  children,
+  asChild,
+}) => {
   return (
     <RdxDropdownMenu.Trigger asChild={asChild} className="outline-none">
       {children}
