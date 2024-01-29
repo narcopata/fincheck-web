@@ -1,7 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { cn } from "@utils/cn";
 import type { FunctionComponent } from "preact";
-import { Content } from "./Content";
 import { Header, type HeaderProps } from "./Header";
 
 type Props = {
@@ -35,7 +34,6 @@ const ModalRoot: FunctionComponent<Props> = ({ open, children }) => {
 export const Modal = {
   Root: ModalRoot,
   Header: Header,
-  Content: Content,
 };
 
 export type { Props as ModalRootProps, HeaderProps as ModalHeaderProps };
