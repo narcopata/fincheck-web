@@ -15,17 +15,15 @@ export const UserMenu = () => {
         </div>
       </DropDownMenu.Trigger>
 
-      <DropDownMenu.Portal>
-        <DropDownMenu.Content className="w-32">
-          <DropDownMenu.Item
-            onselect={signout}
-            className="flex items-center justify-between"
-          >
-            Sair
-            <ExitIcon className="w-4 h-4" />
-          </DropDownMenu.Item>
-        </DropDownMenu.Content>
-      </DropDownMenu.Portal>
+      <DropDownMenu.Content className="w-32">
+        <DropDownMenu.Item
+          onselect={signout}
+          className="flex items-center justify-between"
+        >
+          Sair
+          <ExitIcon className="w-4 h-4" />
+        </DropDownMenu.Item>
+      </DropDownMenu.Content>
     </DropDownMenu.Root>
   );
 };

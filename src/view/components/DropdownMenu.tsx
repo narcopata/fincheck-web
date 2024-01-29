@@ -27,25 +27,23 @@ const DropDownMenuTrigger: FunctionComponent<TriggerProps> = ({
   );
 };
 
-const DropDownMenuPortal: FunctionComponent = ({ children }) => {
-  return <RdxDropdownMenu.Portal>{children}</RdxDropdownMenu.Portal>;
-};
-
 const DropDownMenuContent: FunctionComponent<ContentProps> = ({
   children,
   className,
 }) => {
   return (
-    <RdxDropdownMenu.Content
-      className={cn(
-        "rounded-2xl p-2 bg-white space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)]",
-        "data-[side=bottom]:animate-slideUpAndFade",
-        "data-[side=top]:animate-slideDownAndFade",
-        className,
-      )}
-    >
-      {children}
-    </RdxDropdownMenu.Content>
+    <RdxDropdownMenu.Portal>
+      <RdxDropdownMenu.Content
+        className={cn(
+          "rounded-2xl p-2 bg-white space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] z-[99]",
+          "data-[side=bottom]:animate-slideUpAndFade",
+          "data-[side=top]:animate-slideDownAndFade",
+          className,
+        )}
+      >
+        {children}
+      </RdxDropdownMenu.Content>
+    </RdxDropdownMenu.Portal>
   );
 };
 
@@ -70,7 +68,6 @@ const DropDownMenuItem: FunctionComponent<ItemProps> = ({
 export const DropDownMenu = {
   Root: DropDownMenuRoot,
   Trigger: DropDownMenuTrigger,
-  Portal: DropDownMenuPortal,
   Content: DropDownMenuContent,
   Item: DropDownMenuItem,
 };
