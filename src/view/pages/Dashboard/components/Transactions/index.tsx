@@ -23,6 +23,7 @@ export const Transactions = () => {
     transactions,
     isFiltersModalOpen,
     handleOpenFiltersModal,
+    handleCloseFiltersModal,
   } = useTransactionsController();
 
   const hasTransactions = useMemo(
@@ -32,7 +33,10 @@ export const Transactions = () => {
 
   return (
     <div className="bg-gray-100 rounded-2xl w-full h-full p-10 flex flex-col">
-      <FiltersModal open={isFiltersModalOpen} />
+      <FiltersModal
+        open={isFiltersModalOpen}
+        onClose={handleCloseFiltersModal}
+      />
       {isFirstLoading && (
         <div className="w-full h-full flex items-center justify-center">
           <Spinner className="text-teal-950 fill-white w-10 h-10" />
@@ -132,7 +136,6 @@ export const Transactions = () => {
           </main>
         </>
       )}
-      ;
     </div>
   );
 };
