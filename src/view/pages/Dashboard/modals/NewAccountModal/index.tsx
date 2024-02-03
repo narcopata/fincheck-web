@@ -1,6 +1,8 @@
+import { ColorDropdownInput } from "@components/ColorDropdownInput";
 import { Input } from "@components/Input";
 import { InputCurrency } from "@components/InputCurrency";
 import { Modal } from "@components/Modal";
+import { Select } from "@components/Select";
 import type { FunctionComponent } from "preact";
 import { useNewAccountModal } from "./useNewAccountModal";
 
@@ -26,13 +28,33 @@ export const NewAccountModal: FunctionComponent = () => {
             </form>
           </div>
         </div>
-        <div className="mt-10">
+        <div className="mt-10 flex flex-col gap-4">
           <Input
             type="text"
             name="initialBalance"
             placeholder="Nome da conta"
           />
         </div>
+
+        <Select
+          placeholder="Tipo"
+          options={[
+            {
+              label: "CHECKING",
+              value: "Conta Corrente",
+            },
+            {
+              label: "INVESTMENT",
+              value: "Investimentos",
+            },
+            {
+              label: "CASH",
+              value: "Dinheiro Físico",
+            },
+          ]}
+        />
+
+        <ColorDropdownInput />
       </form>
     </Modal.Root>
   );
