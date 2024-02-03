@@ -36,23 +36,23 @@ export const NewAccountModal: FunctionComponent = () => {
           />
         </div>
 
-        <Select
-          placeholder="Tipo"
-          options={[
-            {
-              label: "CHECKING",
-              value: "Conta Corrente",
-            },
-            {
-              label: "INVESTMENT",
-              value: "Investimentos",
-            },
-            {
-              label: "CASH",
-              value: "Dinheiro Físico",
-            },
-          ]}
-        />
+          <Select
+            placeholder="Tipo"
+            options={[
+              {
+                value: "CHECKING",
+                label: "Conta Corrente",
+              },
+              {
+                value: "INVESTMENT",
+                label: "Investimentos",
+              },
+              {
+                value: "CASH",
+                label: "Dinheiro Físico",
+              },
+            ]}
+          />
 
         <ColorDropdownInput />
       </form>
