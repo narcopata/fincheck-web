@@ -12,7 +12,7 @@ type InputProps = ComponentProps<"input"> & {
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ placeholder, name, id, errorMessage, ...props }, ref) => {
+  ({ placeholder, name, id, errorMessage, className, ...props }, ref) => {
     const inputId = useComputed(() =>
       typeof id === "string" ? id : id?.value ?? name,
     );
@@ -30,6 +30,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {
               "!border-red-900": !!errorMessage,
             },
+            className,
           )}
         />
         <label
@@ -43,7 +44,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {errorMessage && (
           <div className="flex gap-2 mt-2 text-red-900">
             <CrossCircledIcon />
-            <span className=" text-xs ">{errorMessage}</span>
+            <span className="text-xs">{errorMessage}</span>
           </div>
         )}
       </div>
