@@ -18,14 +18,7 @@ export const NewAccountModal: FunctionComponent = () => {
           <span className="text-gray-600 tracking-[-0.5px] text-xs">Saldo</span>
           <div className="flex items-center gap-2">
             <span className="text-gray-600 tracking-[-0.5px] text-lg">R$</span>
-            <form>
-              <div>
-                <span className="text-gray-600 tracking-[-0.5px] text-lg">
-                  R$
-                </span>
-                <InputCurrency />
-              </div>
-            </form>
+            <InputCurrency />
           </div>
         </div>
         <div className="mt-10 flex flex-col gap-4">
