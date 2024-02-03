@@ -6,7 +6,11 @@ type ContentProps = RdxDropdownMenu.DropdownMenuContentProps &
   Partial<Pick<HTMLElement, "className">>;
 
 type ItemProps = RdxDropdownMenu.DropdownMenuItemProps &
-  Partial<Pick<HTMLElement, "className" | "onselect">>;
+  Partial<
+    Pick<HTMLElement, "className" | "onselect"> & {
+      onSelect: HTMLElement["onselect"];
+    }
+  >;
 
 type TriggerProps = RdxDropdownMenu.DropdownMenuTriggerProps & {
   asChild?: boolean;
@@ -50,11 +54,12 @@ const DropDownMenuContent: FunctionComponent<ContentProps> = ({
 const DropDownMenuItem: FunctionComponent<ItemProps> = ({
   children,
   className,
-  onselect,
+  onSelect,
+  onselect
 }) => {
   return (
     <RdxDropdownMenu.Item
-      onselect={onselect}
+      onSelect={onselect || onSelect}
       className={cn(
         "min-h-[40px] outline-none flex items-center px-4 text-gray-800 text-sm data-[highlighted]:bg-gray-50 rounded-2xl transition-colors cursor-pointer",
         className,
