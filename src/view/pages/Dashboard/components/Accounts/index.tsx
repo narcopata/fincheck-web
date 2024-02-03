@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { PlusIcon } from "@assets/icons/radix-icons";
 import { cn } from "@utils/cn";
-// import { PlusIcon } from "../../../../../assets/icons/radix-icons";
+
 import { EyeIcon } from "../icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
 import { SliderNavigation } from "./SliderNavigation";
@@ -17,6 +17,7 @@ export const Accounts = () => {
     windowWidth,
     areValuesVisible,
     toggleValuesVisibility,
+    modals,
     isLoading,
     accounts,
   } = useAccountsController();
@@ -62,6 +63,7 @@ export const Accounts = () => {
                 <button
                   type="button"
                   className="mt-4 h-52 rounded-2xl border-2 border-dashed border-teal-600 flex flex-col items-center justify-center gap-4 text-white hover:bg-teal-950/5 transition-colors w-full"
+                  onClick={modals.newAccount.open}
                 >
                   <div className="w-11 h-11 rounded-full border-2 border-dashed border-white flex items-center justify-center">
                     <PlusIcon className="w-6 h-6" />
