@@ -55,7 +55,7 @@ const DropDownMenuItem: FunctionComponent<ItemProps> = ({
   children,
   className,
   onSelect,
-  onselect
+  onselect,
 }) => {
   return (
     <RdxDropdownMenu.Item
