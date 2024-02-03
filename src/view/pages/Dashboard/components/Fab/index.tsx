@@ -13,7 +13,7 @@ export const Fab: FunctionComponent = () => {
       <DropDownMenu.Root>
         <DropDownMenu.Trigger>
           <button
-            className=" text-white bg-teal-900 rounded-full flex items-center justify-center"
+            className="w-12 h-12 text-white bg-teal-900 rounded-full flex items-center justify-center"
             type="button"
           >
             <PlusIcon className="w-6 h-6" />
