@@ -20,7 +20,7 @@ export const ColorDropdownInput: FunctionComponent<Props> = ({
   return (
     <form>
       <DropDownMenu.Root>
-        <DropDownMenu.Trigger>
+        <DropDownMenu.Trigger asChild>
           <button
             className={cn(
               "bg-white rounded-lg border border-gray-500 focus:border-gray-800 text-gray-700 w-full h-[52px] px-3 outline-none transition-all text-left relative",
