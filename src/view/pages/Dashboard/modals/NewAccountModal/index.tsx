@@ -34,7 +34,6 @@ export const NewAccountModal: FunctionComponent = () => {
             name="initialBalance"
             placeholder="Nome da conta"
           />
-        </div>
 
           <Select
             placeholder="Tipo"
@@ -54,7 +53,8 @@ export const NewAccountModal: FunctionComponent = () => {
             ]}
           />
 
-        <ColorDropdownInput />
+          <ColorDropdownInput />
+        </div>
       </form>
     </Modal.Root>
   );
