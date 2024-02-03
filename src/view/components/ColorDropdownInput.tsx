@@ -17,10 +17,6 @@ export const ColorDropdownInput: FunctionComponent<Props> = ({
 }) => {
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
 
-  const handleSelect = (color: Color) => {
-    setSelectedColor(color);
-  }
-
   return (
     <form>
       <DropDownMenu.Root>
@@ -36,29 +32,21 @@ export const ColorDropdownInput: FunctionComponent<Props> = ({
             type="button"
           >
             Cor
-
             <div className="absolute right-3 top-1/2 -translate-y-1/2">
-              {!selectedColor && <ChevronDownIcon
-                className="w-6 h-6 text-gray-800"
-              />}
-              {
-                selectedColor && <ColorIcon
-                  {...selectedColor}
-                />
-              }
+              {!selectedColor && (
+                <ChevronDownIcon className="w-6 h-6 text-gray-800" />
+              )}
+              {selectedColor && <ColorIcon {...selectedColor} />}
             </div>
           </button>
         </DropDownMenu.Trigger>
 
-        <DropDownMenu.Content
-          className="grid grid-cols-4"
-        >
+        <DropDownMenu.Content className="grid grid-cols-4">
           {COLORS.map((color) => (
             <DropDownMenu.Item
-            onselect={
-              () => handleSelect(color)
-            }
-            key={color.bg}>
+              onselect={() => setSelectedColor(color)}
+              key={color.bg}
+            >
               <ColorIcon {...color} />
             </DropDownMenu.Item>
           ))}
