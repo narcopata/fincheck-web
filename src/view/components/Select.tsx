@@ -51,7 +51,7 @@ export const Select: FunctionComponent<SelectProps> = ({
             )}
           >
             <RdxSelect.Value />
-            <RdxSelect.Icon className="absolute">
+            <RdxSelect.Icon className="absolute right-3 top-1/2 -translate-y-1/2">
               <ChevronDownIcon className="w-6 h-6 text-gray-800" />
             </RdxSelect.Icon>
           </RdxSelect.Trigger>
