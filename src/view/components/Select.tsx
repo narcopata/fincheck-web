@@ -4,7 +4,7 @@ import { ChevronDownIcon } from "@assets/icons/radix-icons";
 import { ChevronUpIcon, CrossCircledIcon } from "@radix-ui/react-icons";
 import * as RdxSelect from "@radix-ui/react-select";
 import { cn } from "@utils/cn";
-import { forwardRef, useState } from "preact/compat";
+import { useState } from "preact/hooks";
 
 type Option = {
   value: string;
@@ -17,30 +17,11 @@ type SelectProps = Omit<Partial<HTMLSelectElement>, "options"> & {
   options: Option[];
 };
 
-const SelectItem = forwardRef<
-  HTMLDivElement,
-  RdxSelect.SelectItemProps & HTMLDivElement
->(({ children, className, ...props }, ref) => {
-  return (
-    <RdxSelect.Item
-      className={cn(
-        "p-2 text-gray-800 text-sm data-[checked]:font-bold outline-none data-[highlighted]:bg-gray-100 rounded-lg transition-colors",
-        className,
-      )}
-      {...props}
-      ref={ref}
-    >
-      <RdxSelect.ItemText>{children}</RdxSelect.ItemText>
-    </RdxSelect.Item>
-  );
-});
-
 export const Select: FunctionComponent<SelectProps> = ({
   className,
   errorMessage,
   placeholder,
   options,
-  ..._props
 }) => {
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -82,9 +63,15 @@ export const Select: FunctionComponent<SelectProps> = ({
 
               <RdxSelect.Viewport className="p-2">
                 {options.map(({ label, value }) => (
-                  <SelectItem key={value} value={value}>
-                    {label}
-                  </SelectItem>
+                  <RdxSelect.Item
+                    className={cn(
+                      "p-2 text-gray-800 text-sm data-[checked]:font-bold outline-none data-[highlighted]:bg-gray-100 rounded-lg transition-colors",
+                    )}
+                    key={value}
+                    value={value}
+                  >
+                    <RdxSelect.ItemText>{label}</RdxSelect.ItemText>
+                  </RdxSelect.Item>
                 ))}
               </RdxSelect.Viewport>
 
