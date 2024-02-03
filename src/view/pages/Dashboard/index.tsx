@@ -4,6 +4,7 @@ import { Accounts } from "./components/Accounts";
 import { Fab } from "./components/Fab";
 import { Transactions } from "./components/Transactions";
 import { DashboardProvider } from "./contexts/Dashboard";
+import { NewAccountModal } from "./modals/NewAccountModal";
 
 export const Dashboard = () => {
   return (
@@ -23,6 +24,8 @@ export const Dashboard = () => {
         </main>
 
         <Fab />
+
+        <NewAccountModal />
       </div>
     </DashboardProvider>
   );
