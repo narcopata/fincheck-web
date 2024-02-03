@@ -4,14 +4,12 @@ import { Modal } from "@components/Modal";
 import type { FunctionComponent } from "preact";
 import { useNewAccountModal } from "./useNewAccountModal";
 
-// type Props = ModalRootProps;
-
 export const NewAccountModal: FunctionComponent = () => {
-  const { closeAccountModalOpen, isNewAccountModalOpen } = useNewAccountModal();
+  const { modals } = useNewAccountModal();
 
   return (
-    <Modal.Root open={isNewAccountModalOpen}>
-      <Modal.Header title="Nova Conta" onClose={closeAccountModalOpen} />
+    <Modal.Root open={modals.newAccount.isOpen}>
+      <Modal.Header title="Nova Conta" onClose={modals.newAccount.close} />
 
       <form>
         <div>
