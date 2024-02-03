@@ -45,7 +45,7 @@ export const ColorDropdownInput: FunctionComponent<Props> = ({
           {COLORS.map((color) => (
             <DropDownMenu.Item
               onselect={() => setSelectedColor(color)}
-              key={color.bg}
+              key={color.color}
             >
               <ColorIcon {...color} />
             </DropDownMenu.Item>
