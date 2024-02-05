@@ -1,3 +1,4 @@
+import { Button } from "@components/Button";
 import { ColorDropdownInput } from "@components/ColorDropdownInput";
 import { Input } from "@components/Input";
 import { InputCurrency } from "@components/InputCurrency";
@@ -24,7 +25,7 @@ export const NewAccountModal: FunctionComponent = () => {
         <div className="mt-10 flex flex-col gap-4">
           <Input
             type="text"
-            name="initialBalance"
+            name="name"
             placeholder="Nome da conta"
           />
 
@@ -47,6 +48,8 @@ export const NewAccountModal: FunctionComponent = () => {
           />
 
           <ColorDropdownInput />
+
+          <Button>Salvar</Button>
         </div>
       </form>
     </Modal.Root>
