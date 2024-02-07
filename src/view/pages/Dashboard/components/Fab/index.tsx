@@ -21,11 +21,17 @@ export const Fab: FunctionComponent = () => {
         </DropDownMenu.Trigger>
 
         <DropDownMenu.Content>
-          <DropDownMenu.Item className="gap-2">
+          <DropDownMenu.Item
+            onselect={() => modals.newTransaction.open("income")}
+            className="gap-2"
+          >
             <CategoryIcon type="expense" />
             Nova Despesa
           </DropDownMenu.Item>
-          <DropDownMenu.Item className="gap-2">
+          <DropDownMenu.Item
+            onselect={() => modals.newTransaction.open("expense")}
+            className="gap-2"
+          >
             <CategoryIcon type="income" />
             Nova Receita
           </DropDownMenu.Item>
