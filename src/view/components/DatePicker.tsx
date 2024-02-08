@@ -1,8 +1,8 @@
+import { capitalizeFirstLetter } from "@utils/capitalizeFirstLetter";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import type { FunctionComponent } from "preact";
 import { DayPicker, type DayPickerProps } from "react-day-picker";
-import { capitalizeFirstLetter } from "@utils/capitalizeFirstLetter";
 
 type Props = {
   value: Date;
@@ -33,7 +33,7 @@ export const DatePicker: FunctionComponent<Props> = ({ value, onChange }) => {
         formatCaption: (date, options) => {
           return (
             <span className="text-gray-900 tracking-[-0.4px] font-medium">
-              {capitalizeFirstLetter(format(date, "LLLL YYYY", options))}
+              {capitalizeFirstLetter(format(date, "LLLL yyyy", options))}
             </span>
           );
         },
