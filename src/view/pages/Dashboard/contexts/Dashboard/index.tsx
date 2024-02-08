@@ -1,6 +1,8 @@
 import { type Provider, createContext } from "preact";
 import { useCallback, useMemo, useReducer, useState } from "preact/hooks";
 
+type TransactionType = "income" | "expense";
+
 type Props = {
   areValuesVisible: boolean;
   toggleValuesVisibility: () => void;
@@ -8,6 +10,12 @@ type Props = {
     newAccount: {
       isOpen: boolean;
       open(): void;
+      close(): void;
+    };
+    newTransaction: {
+      isOpen: boolean;
+      type: TransactionType | null;
+      open(type: TransactionType): void;
       close(): void;
     };
   };
@@ -22,15 +30,31 @@ export const DashboardProvider: Provider<Props | null> = ({ children }) => {
   );
 
   const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
+  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] =
+    useState(false);
+  const [newTransactionType, setNewTransactionType] =
+    useState<TransactionType | null>(null);
 
   const openNewAccountModal: Props["modals"]["newAccount"]["open"] =
     useCallback(() => {
       setIsNewAccountModalOpen(true);
     }, []);
 
-  const closeAccountModalOpen: Props["modals"]["newAccount"]["close"] =
+  const closeAccountModal: Props["modals"]["newAccount"]["close"] =
     useCallback(() => {
       setIsNewAccountModalOpen(false);
+    }, []);
+
+  const openNewTransactionModal: Props["modals"]["newTransaction"]["open"] =
+    useCallback((type) => {
+      setNewTransactionType(type);
+      setIsNewTransactionModalOpen(true);
+    }, []);
+
+  const closeTransactionModal: Props["modals"]["newTransaction"]["close"] =
+    useCallback(() => {
+      setNewTransactionType(null);
+      setIsNewTransactionModalOpen(false);
     }, []);
 
   const contextValue = useMemo<Props>(
@@ -41,16 +65,26 @@ export const DashboardProvider: Provider<Props | null> = ({ children }) => {
       modals: {
         newAccount: {
           isOpen: isNewAccountModalOpen,
-          close: closeAccountModalOpen,
+          close: closeAccountModal,
           open: openNewAccountModal,
+        },
+        newTransaction: {
+          close: closeTransactionModal,
+          open: openNewTransactionModal,
+          isOpen: isNewTransactionModalOpen,
+          type: newTransactionType,
         },
       },
     }),
     [
       areValuesVisible,
       isNewAccountModalOpen,
-      closeAccountModalOpen,
+      closeAccountModal,
       openNewAccountModal,
+      closeTransactionModal,
+      openNewTransactionModal,
+      isNewTransactionModalOpen,
+      newTransactionType,
     ],
   );
 
