@@ -2,6 +2,7 @@ import { message } from "@utils/message";
 import { useDashboard } from "../../contexts/Dashboard/useDashboard";
 
 import { BANK_ACCOUNT_TYPES } from "@constants/bankAccountTypes";
+import { COLORS, type ColorKey } from "@constants/colors";
 import { superstructResolver } from "@hookform/resolvers/superstruct";
 import { useCallback, useMemo } from "preact/hooks";
 import { useForm } from "react-hook-form";
@@ -23,7 +24,12 @@ const schema = ss.object({
   initialBalance: isStringNumber(),
   name: message(ss.nonempty(ss.string()), "O nome é um campo obrigatório"),
   type: message(ss.enums(Object.values(BANK_ACCOUNT_TYPES)), "Valor inválido"),
-  color: message(ss.nonempty(ss.string()), "Cor é um campo obrigatório"),
+  color: message(
+    ss.nonempty(
+      ss.enums([...(Object.keys(COLORS) as unknown as ColorKey[]), ""]),
+    ),
+    "Cor é um campo obrigatório",
+  ),
 });
 
 type FormDataType = ss.Infer<typeof schema>;
