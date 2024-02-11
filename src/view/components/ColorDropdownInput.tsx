@@ -2,24 +2,34 @@ import { ChevronDownIcon } from "@assets/icons/radix-icons";
 import { COLORS, type ColorKey, type ColorValue } from "@constants/colors";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { cn } from "@utils/cn";
-import type { FunctionComponent } from "preact";
-import { useState } from "preact/hooks";
+import type { ComponentProps, FunctionComponent } from "preact";
+import { useCallback, useState } from "preact/hooks";
 import { ColorIcon } from "../pages/Dashboard/components/icons/ColorIcon";
 import { DropDownMenu } from "./DropdownMenu";
 
-type Props = Partial<HTMLSelectElement> & {
+type Props = Partial<ComponentProps<"select">> & {
   errorMessage?: string;
+  onInput?: (color: ColorKey) => void;
+  value?: ColorKey | "";
 };
 
 export const ColorDropdownInput: FunctionComponent<Props> = ({
   errorMessage,
   className,
+  onInput,
+  value,
 }) => {
-  const [selectedColor, setSelectedColor] = useState<ColorKey | null>(null);
+  const [selectedColor, setSelectedColor] = useState<ColorKey | null>(
+    value || null,
+  );
 
-  const handleSelect = useCallback((color: ColorKey) => {
-    setSelectedColor(color);
-  }, []);
+  const handleSelect = useCallback(
+    (color: ColorKey) => {
+      setSelectedColor(color);
+      onInput?.(color);
+    },
+    [onInput],
+  );
 
   return (
     <form>

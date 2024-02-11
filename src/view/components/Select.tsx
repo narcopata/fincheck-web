@@ -1,20 +1,21 @@
-import type { FunctionComponent } from "preact";
+import type { ComponentProps, FunctionComponent } from "preact";
 
 import { ChevronDownIcon } from "@assets/icons/radix-icons";
 import { ChevronUpIcon, CrossCircledIcon } from "@radix-ui/react-icons";
 import * as RdxSelect from "@radix-ui/react-select";
 import { cn } from "@utils/cn";
-import { useState } from "preact/hooks";
+import { useCallback, useState } from "preact/hooks";
 
 type Option = {
   value: string;
   label: string;
 };
 
-type SelectProps = Omit<Partial<HTMLSelectElement>, "options"> & {
+type SelectProps = Omit<ComponentProps<"select">, "options"> & {
   errorMessage?: string;
   placeholder?: string;
   options: Option[];
+  onInput?: (value: string) => void;
 };
 
 export const Select: FunctionComponent<SelectProps> = ({
@@ -22,8 +23,18 @@ export const Select: FunctionComponent<SelectProps> = ({
   errorMessage,
   placeholder,
   options,
+  value,
+  onInput,
 }) => {
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState(value ?? "");
+
+  const handleSelect = useCallback(
+    (value: string) => {
+      setSelectedValue(value);
+      onInput?.(value);
+    },
+    [onInput],
+  );
 
   return (
     <div>
@@ -40,7 +51,10 @@ export const Select: FunctionComponent<SelectProps> = ({
           {placeholder}
         </label>
 
-        <RdxSelect.Root onValueChange={(value) => setSelectedValue(value)}>
+        <RdxSelect.Root
+          onValueChange={(value) => handleSelect(value)}
+          value={value as string}
+        >
           <RdxSelect.Trigger
             className={cn(
               "bg-white rounded-lg border border-gray-500 focus:border-gray-800 text-gray-800 w-full h-[52px] px-3 outline-none transition-all text-left relative pt-4",

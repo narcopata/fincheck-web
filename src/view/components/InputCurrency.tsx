@@ -1,13 +1,18 @@
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { cn } from "@utils/cn";
-import type { FunctionComponent } from "preact";
+import type { ComponentProps, FunctionComponent } from "preact";
 import { NumericFormat } from "react-number-format";
 
 type Props = {
   errorMessage?: string;
-};
+  onInput?: (value: string) => void;
+} & Partial<Pick<ComponentProps<"input">, "value">>;
 
-export const InputCurrency: FunctionComponent<Props> = ({ errorMessage }) => {
+export const InputCurrency: FunctionComponent<Props> = ({
+  errorMessage,
+  onInput,
+  value,
+}) => {
   return (
     <div>
       <NumericFormat
@@ -18,6 +23,10 @@ export const InputCurrency: FunctionComponent<Props> = ({ errorMessage }) => {
           errorMessage && "text-red-900",
         )}
         defaultValue={0}
+        onChange={(event: Event) =>
+          onInput?.((event?.currentTarget as HTMLInputElement)?.value)
+        }
+        value={value as string}
       />
 
       {errorMessage && (
