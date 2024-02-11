@@ -41,7 +41,7 @@ export const DatePickerInput: FunctionComponent<Props> = ({
         <Popover.Content>
           <DatePicker
             value={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
+            onInput={(date) => setSelectedDate(date)}
           />
         </Popover.Content>
       </Popover.Root>

@@ -2,20 +2,20 @@ import { capitalizeFirstLetter } from "@utils/capitalizeFirstLetter";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import type { FunctionComponent } from "preact";
-import { DayPicker, type DayPickerProps } from "react-day-picker";
+import { DayPicker } from "react-day-picker";
 
 type Props = {
   value: Date;
-  onChange?: (date: Date) => void;
-} & DayPickerProps;
+  onInput?: (date: Date) => void;
+};
 
-export const DatePicker: FunctionComponent<Props> = ({ value, onChange }) => {
+export const DatePicker: FunctionComponent<Props> = ({ value, onInput }) => {
   return (
     <DayPicker
       locale={ptBR}
       selected={value}
       mode="single"
-      onSelect={(date: Date) => onChange?.(date ?? new Date())}
+      onSelect={(date) => onInput?.(date ?? new Date())}
       classNames={{
         caption: "flex items-center justify-between",
         nav: "flex gap-1",
