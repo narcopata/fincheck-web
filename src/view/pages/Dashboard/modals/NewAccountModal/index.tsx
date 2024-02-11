@@ -59,7 +59,9 @@ export const NewAccountModal: FunctionComponent = () => {
             {...form.register("color")}
           />
 
-          <Button>Salvar</Button>
+          <Button className="w-full mt-6" isPending={form.isPending}>
+            Criar
+          </Button>
         </div>
       </form>
     </Modal.Root>

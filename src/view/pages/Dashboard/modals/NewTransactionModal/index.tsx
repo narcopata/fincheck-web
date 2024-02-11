@@ -62,7 +62,7 @@ export const NewTransactionModal = () => {
 
           <DatePickerInput />
 
-          <Button>Criar</Button>
+          <Button className="w-full mt-6">Salvar</Button>
         </div>
       </form>
     </Modal.Root>
