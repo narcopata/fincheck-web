@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from "@assets/icons/radix-icons";
-import { COLORS, type Color } from "@constants/colors";
+import { COLORS, type ColorKey, type ColorValue } from "@constants/colors";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { cn } from "@utils/cn";
 import type { FunctionComponent } from "preact";
@@ -15,7 +15,11 @@ export const ColorDropdownInput: FunctionComponent<Props> = ({
   errorMessage,
   className,
 }) => {
-  const [selectedColor, setSelectedColor] = useState<Color | null>(null);
+  const [selectedColor, setSelectedColor] = useState<ColorKey | null>(null);
+
+  const handleSelect = useCallback((color: ColorKey) => {
+    setSelectedColor(color);
+  }, []);
 
   return (
     <form>
@@ -36,20 +40,22 @@ export const ColorDropdownInput: FunctionComponent<Props> = ({
               {!selectedColor && (
                 <ChevronDownIcon className="w-6 h-6 text-gray-800" />
               )}
-              {selectedColor && <ColorIcon {...selectedColor} />}
+              {selectedColor && <ColorIcon {...COLORS[selectedColor]} />}
             </div>
           </button>
         </DropDownMenu.Trigger>
 
         <DropDownMenu.Content className="grid grid-cols-4">
-          {COLORS.map((color) => (
-            <DropDownMenu.Item
-              onselect={() => setSelectedColor(color)}
-              key={color.color}
-            >
-              <ColorIcon {...color} />
-            </DropDownMenu.Item>
-          ))}
+          {(Object.entries(COLORS) as [ColorKey, ColorValue][]).map(
+            ([key, color]) => (
+              <DropDownMenu.Item
+                onselect={() => handleSelect(key)}
+                key={color.color}
+              >
+                <ColorIcon {...color} />
+              </DropDownMenu.Item>
+            ),
+          )}
         </DropDownMenu.Content>
       </DropDownMenu.Root>
 
