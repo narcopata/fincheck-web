@@ -1,8 +1,8 @@
 import * as RdxPopover from "@radix-ui/react-popover";
 import { cn } from "@utils/cn";
-import type { FunctionComponent } from "preact";
+import type { ComponentProps, FunctionComponent } from "preact";
 
-type ContentProps = RdxPopover.PopoverContentProps & Partial<HTMLDivElement>;
+type ContentProps = RdxPopover.PopoverContentProps & ComponentProps<"div">;
 
 const Root: FunctionComponent<RdxPopover.PopoverProps> = ({ children }) => {
   return <RdxPopover.Root>{children}</RdxPopover.Root>;
