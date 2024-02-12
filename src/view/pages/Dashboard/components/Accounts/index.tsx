@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { PlusIcon } from "@assets/icons/radix-icons";
 import { cn } from "@utils/cn";
 
+import { formatCurrency } from "@utils/formatCurrency";
 import { EyeIcon } from "../icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
 import { SliderNavigation } from "./SliderNavigation";
@@ -20,6 +21,7 @@ export const Accounts = () => {
     modals,
     isLoading,
     accounts,
+    totalCurrentBalance,
   } = useAccountsController();
 
   return (
@@ -42,7 +44,7 @@ export const Accounts = () => {
                   !areValuesVisible && "blur-md",
                 )}
               >
-                R$ 1000.00
+                R$ {formatCurrency(totalCurrentBalance)}
               </strong>
               <button
                 type="button"
@@ -99,9 +101,7 @@ export const Accounts = () => {
 
                   <div>
                     {accounts.map((account) => (
-                      <SwiperSlide
-                        key={account.id}
-                      >
+                      <SwiperSlide key={account.id}>
                         <AccountCard
                           name={account.name}
                           balance={account.currentBalance}
