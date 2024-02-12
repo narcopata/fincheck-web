@@ -99,7 +99,9 @@ export const Accounts = () => {
 
                   <div>
                     {accounts.map((account) => (
-                      <SwiperSlide>
+                      <SwiperSlide
+                        key={account.id}
+                      >
                         <AccountCard
                           name={account.name}
                           balance={account.currentBalance}
