@@ -1,11 +1,12 @@
 import { message } from "@utils/message";
 import { useDashboard } from "../../contexts/Dashboard/useDashboard";
 
+import { QUERY_KEYS } from "@config/queryKeys";
 import { BANK_ACCOUNT_TYPES } from "@constants/bankAccountTypes";
 import { COLORS, type ColorKey } from "@constants/colors";
 import { superstructResolver } from "@hookform/resolvers/superstruct";
 import { bankAccountService } from "@services/bankAccounts";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { currencyStringToNumber } from "@utils/currencyStringToNumber";
 import { useMemo } from "preact/hooks";
 import { useForm } from "react-hook-form";
@@ -50,6 +51,8 @@ export const useNewAccountModal = () => {
     resolver: superstructResolver(schema),
   });
 
+  const queryClient = useQueryClient();
+
   const { mutateAsync, isPending } = useMutation({
     mutationFn: bankAccountService.create,
   });
@@ -59,6 +62,10 @@ export const useNewAccountModal = () => {
       await mutateAsync({
         ...data,
         initialBalance: currencyStringToNumber(data.initialBalance),
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.BANK_ACCOUNTS_ALL,
       });
 
       toast.success("Conta foi cadastrada com sucesso");
