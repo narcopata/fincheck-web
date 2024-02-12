@@ -1,3 +1,4 @@
+import { QUERY_KEYS } from "@config/queryKeys";
 import { bankAccountService } from "@services/bankAccounts";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "preact/hooks";
@@ -9,7 +10,7 @@ export const useAccountsController = () => {
   const { areValuesVisible, toggleValuesVisibility, modals } = useDashboard();
 
   const { data = [], isPending } = useQuery({
-    queryKey: ["bankAccounts", "all"],
+    queryKey: QUERY_KEYS.BANK_ACCOUNTS_ALL,
     queryFn: bankAccountService.getAll,
   });
 
