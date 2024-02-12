@@ -1,3 +1,5 @@
+import { bankAccountService } from "@services/bankAccounts";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "preact/hooks";
 import { useWindowWidth } from "../../../../../app/hooks/useWindowWidth";
 import { useDashboard } from "../../contexts/Dashboard/useDashboard";
@@ -5,6 +7,11 @@ import { useDashboard } from "../../contexts/Dashboard/useDashboard";
 export const useAccountsController = () => {
   const windowWidth = useWindowWidth();
   const { areValuesVisible, toggleValuesVisibility, modals } = useDashboard();
+
+  const { data = [], isPending } = useQuery({
+    queryKey: ["bankAccounts", "all"],
+    queryFn: bankAccountService.getAll,
+  });
 
   const [slider, setSlider] = useState({
     isBeginning: true,
@@ -18,7 +25,7 @@ export const useAccountsController = () => {
     areValuesVisible,
     toggleValuesVisibility,
     modals,
-    isLoading: true,
-    accounts: [],
+    isLoading: isPending,
+    accounts: data,
   };
 };
