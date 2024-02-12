@@ -75,7 +75,7 @@ export const Accounts = () => {
               </div>
             )}
 
-            {accounts.length > 0 && (
+            {accounts.length && accounts.length > 0 && (
               <div>
                 <Swiper
                   spaceBetween={16}
@@ -98,14 +98,16 @@ export const Accounts = () => {
                   </div>
 
                   <div>
-                    <SwiperSlide>
-                      <AccountCard
-                        name="Nubank"
-                        balance={1000}
-                        color="#612F74"
-                        type="CASH"
-                      />
-                    </SwiperSlide>
+                    {accounts.map((account) => (
+                      <SwiperSlide>
+                        <AccountCard
+                          name={account.name}
+                          balance={account.currentBalance}
+                          color={account.color}
+                          type={account.type}
+                        />
+                      </SwiperSlide>
+                    ))}
                   </div>
                 </Swiper>
               </div>
