@@ -1,15 +1,15 @@
+import type { BankAccountType } from "@constants/bankAccountTypes";
 import { cn } from "@utils/cn";
 import { formatCurrency } from "@utils/formatCurrency";
 import type { FunctionComponent } from "preact";
 import { useDashboard } from "../../contexts/Dashboard/useDashboard";
 import { BankAccountTypeIcon } from "../icons/BankAccountTypeIcon";
-import type { iconsMap as bankAccountTypesIconsMap } from "../icons/BankAccountTypeIcon/iconsMap";
 
 type Props = {
   color: string;
   name: string;
   balance: number;
-  type: keyof typeof bankAccountTypesIconsMap;
+  type: BankAccountType;
 };
 
 export const AccountCard: FunctionComponent<Props> = ({

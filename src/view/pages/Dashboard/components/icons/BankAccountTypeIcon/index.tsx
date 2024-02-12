@@ -1,7 +1,8 @@
+import type { BankAccountType } from "@constants/bankAccountTypes";
 import { iconsMap } from "./iconsMap";
 
 interface BankAccountTypeIconProps {
-  type: keyof typeof iconsMap;
+  type: BankAccountType;
 }
 
 export function BankAccountTypeIcon({ type }: BankAccountTypeIconProps) {
