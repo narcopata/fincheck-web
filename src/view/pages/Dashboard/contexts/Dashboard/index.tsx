@@ -1,5 +1,6 @@
 import { type Provider, createContext } from "preact";
 import { useCallback, useMemo, useReducer, useState } from "preact/hooks";
+import type { BankAccount } from "../../../../../app/entities/BankAccount";
 
 type TransactionType = "income" | "expense";
 
@@ -18,10 +19,43 @@ type Props = {
       open(type: TransactionType): void;
       close(): void;
     };
+    editAccount: {
+      isOpen: boolean;
+      open(account: BankAccount): void;
+      close(): void;
+      account: BankAccount | null;
+    };
   };
 };
 
 export const DashboardContext = createContext<Props | null>(null);
+
+const useEditAccountModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [account, setAccount] = useState<BankAccount | null>(null);
+
+  const open = useCallback((bankAccount: BankAccount) => {
+    setIsOpen(true);
+    setAccount(bankAccount);
+  }, []);
+
+  const close = useCallback(() => {
+    setIsOpen(false);
+    setAccount(null);
+  }, []);
+
+  const data = useMemo(
+    () => ({
+      open,
+      close,
+      isOpen,
+      account,
+    }),
+    [open, close, isOpen],
+  );
+
+  return data;
+};
 
 export const DashboardProvider: Provider<Props | null> = ({ children }) => {
   const [areValuesVisible, toggleValuesVisibility] = useReducer(
@@ -57,6 +91,8 @@ export const DashboardProvider: Provider<Props | null> = ({ children }) => {
       setIsNewTransactionModalOpen(false);
     }, []);
 
+  const editAccountModalData = useEditAccountModal();
+
   const contextValue = useMemo<Props>(
     () => ({
       areValuesVisible,
@@ -74,6 +110,7 @@ export const DashboardProvider: Provider<Props | null> = ({ children }) => {
           isOpen: isNewTransactionModalOpen,
           type: newTransactionType,
         },
+        editAccount: editAccountModalData,
       },
     }),
     [
@@ -85,6 +122,7 @@ export const DashboardProvider: Provider<Props | null> = ({ children }) => {
       openNewTransactionModal,
       isNewTransactionModalOpen,
       newTransactionType,
+      useEditAccountModal,
     ],
   );
 
