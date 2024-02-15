@@ -1,8 +1,11 @@
+import type { ColorKey } from "@constants/colors";
 import { type Provider, createContext } from "preact";
 import { useCallback, useMemo, useReducer, useState } from "preact/hooks";
 import type { BankAccount } from "../../../../../app/entities/BankAccount";
 
 type TransactionType = "income" | "expense";
+
+type ModalBankAccount = Omit<BankAccount, "color"> & Record<"color", ColorKey>;
 
 type Props = {
   areValuesVisible: boolean;
@@ -21,9 +24,9 @@ type Props = {
     };
     editAccount: {
       isOpen: boolean;
-      open(account: BankAccount): void;
+      open(account: ModalBankAccount): void;
       close(): void;
-      account: BankAccount | null;
+      account: ModalBankAccount | null;
     };
   };
 };
@@ -32,9 +35,9 @@ export const DashboardContext = createContext<Props | null>(null);
 
 const useEditAccountModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [account, setAccount] = useState<BankAccount | null>(null);
+  const [account, setAccount] = useState<ModalBankAccount | null>(null);
 
-  const open = useCallback((bankAccount: BankAccount) => {
+  const open = useCallback((bankAccount: ModalBankAccount) => {
     setIsOpen(true);
     setAccount(bankAccount);
   }, []);

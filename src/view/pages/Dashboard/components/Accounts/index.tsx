@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { PlusIcon } from "@assets/icons/radix-icons";
 import { cn } from "@utils/cn";
 
+import { COLORS, type ColorKey, type ColorValue } from "@constants/colors";
 import { formatCurrency } from "@utils/formatCurrency";
 import { EyeIcon } from "../icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
@@ -23,6 +24,18 @@ export const Accounts = () => {
     accounts,
     totalCurrentBalance,
   } = useAccountsController();
+
+  const getColorKeyFromColorValue = (color: ColorValue["color"]): ColorKey => {
+    const tuple = Object.entries(COLORS) as [ColorKey, ColorValue][];
+
+    const key = (
+      tuple.find(([_, v]) => {
+        return v.color === color;
+      }) as (typeof tuple)[number]
+    )[0];
+
+    return key;
+  };
 
   return (
     <div className="bg-teal-900 rounded-2xl w-full h-full md:p-10 px-4 py-8 flex flex-col">
@@ -103,10 +116,12 @@ export const Accounts = () => {
                     {accounts.map((account) => (
                       <SwiperSlide key={account.id}>
                         <AccountCard
-                          name={account.name}
-                          balance={account.currentBalance}
-                          color={account.color}
-                          type={account.type}
+                          data={{
+                            ...account,
+                            colorKey: getColorKeyFromColorValue(
+                              account.color as ColorValue["color"],
+                            ),
+                          }}
                         />
                       </SwiperSlide>
                     ))}
