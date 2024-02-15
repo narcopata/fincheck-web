@@ -13,7 +13,7 @@ type Response = Array<{
 
 export const getAll = async () => {
   const data = await httpClient
-    .get("/bank-accounts")
+    .get("bank-accounts")
     .json<Response>();
 
   return data;
