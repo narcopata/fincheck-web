@@ -79,7 +79,7 @@ export const Select: FunctionComponent<SelectProps> = ({
                 {options.map(({ label, value }) => (
                   <RdxSelect.Item
                     className={cn(
-                      "p-2 text-gray-800 text-sm data-[checked]:font-bold outline-none data-[highlighted]:bg-gray-100 rounded-lg transition-colors",
+                      "p-2 text-gray-800 text-sm data-[state=checked]:font-bold outline-none data-[highlighted]:bg-gray-50 rounded-lg transition-colors",
                     )}
                     key={value}
                     value={value}
