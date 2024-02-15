@@ -25,7 +25,7 @@ const isStringNumber = () =>
   });
 
 const schema = ss.object({
-  initialBalance: isStringNumber(),
+  initialBalance: ss.union([isStringNumber(), ss.number()]),
   name: message(ss.nonempty(ss.string()), "O nome é um campo obrigatório"),
   type: message(ss.enums(Object.values(BANK_ACCOUNT_TYPES)), "Valor inválido"),
   color: message(
@@ -59,9 +59,14 @@ export const useNewAccountModal = () => {
 
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
+      if (!data.color) {
+        return;
+      }
+
       await mutateAsync({
         ...data,
         initialBalance: currencyStringToNumber(data.initialBalance),
+        color: COLORS[data.color].color,
       });
 
       queryClient.invalidateQueries({
