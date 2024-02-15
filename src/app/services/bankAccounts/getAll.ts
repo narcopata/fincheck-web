@@ -11,11 +11,9 @@ type Response = Array<{
   currentBalance: number;
 }>;
 
-export const getAll = async (params?: unknown) => {
+export const getAll = async () => {
   const data = await httpClient
-    .get("/bank-accounts", {
-      json: params,
-    })
+    .get("/bank-accounts")
     .json<Response>();
 
   return data;
