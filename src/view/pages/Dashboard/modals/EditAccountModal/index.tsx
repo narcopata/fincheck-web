@@ -4,6 +4,7 @@ import { Input } from "@components/Input";
 import { InputCurrency } from "@components/InputCurrency";
 import { Modal } from "@components/Modal";
 import { Select } from "@components/Select";
+import { BANK_ACCOUNT_TYPES } from "@constants/bankAccountTypes";
 import type { FunctionComponent } from "preact";
 import { Controller } from "react-hook-form";
 import { useEditAccountModal } from "./useEditAccountModal";
@@ -54,15 +55,15 @@ export const EditAccountModal: FunctionComponent = () => {
                 errorMessage={form.errors.type?.message}
                 options={[
                   {
-                    value: "CHECKING",
+                    value: BANK_ACCOUNT_TYPES.CHECKING,
                     label: "Conta Corrente",
                   },
                   {
-                    value: "INVESTMENT",
+                    value: BANK_ACCOUNT_TYPES.INVESTMENT,
                     label: "Investimentos",
                   },
                   {
-                    value: "CASH",
+                    value: BANK_ACCOUNT_TYPES.CASH,
                     label: "Dinheiro Físico",
                   },
                 ]}
