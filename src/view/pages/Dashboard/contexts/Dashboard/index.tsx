@@ -54,7 +54,7 @@ const useEditAccountModal = () => {
       isOpen,
       account,
     }),
-    [open, close, isOpen],
+    [open, close, isOpen, account],
   );
 
   return data;
@@ -125,7 +125,7 @@ export const DashboardProvider: Provider<Props | null> = ({ children }) => {
       openNewTransactionModal,
       isNewTransactionModalOpen,
       newTransactionType,
-      useEditAccountModal,
+      editAccountModalData,
     ],
   );
 
