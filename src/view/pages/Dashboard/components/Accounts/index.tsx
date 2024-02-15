@@ -90,7 +90,7 @@ export const Accounts = () => {
               </div>
             )}
 
-            {accounts.length && accounts.length > 0 && (
+            {accounts.length > 0 && (
               <div>
                 <Swiper
                   spaceBetween={16}
