@@ -5,7 +5,6 @@ import { InputCurrency } from "@components/InputCurrency";
 import { Modal } from "@components/Modal";
 import { Select } from "@components/Select";
 import { BANK_ACCOUNT_TYPES } from "@constants/bankAccountTypes";
-import { currencyStringToNumber } from "@utils/currencyStringToNumber";
 import type { FunctionComponent } from "preact";
 import { Controller } from "react-hook-form";
 import { useEditAccountModal } from "./useEditAccountModal";
@@ -30,7 +29,7 @@ export const EditAccountModal: FunctionComponent = () => {
                 <InputCurrency
                   errorMessage={form.errors.initialBalance?.message}
                   onInput={onChange}
-                  value={currencyStringToNumber(value)}
+                  value={value}
                 />
               )}
             />
@@ -85,7 +84,11 @@ export const EditAccountModal: FunctionComponent = () => {
             )}
           />
 
-          <Button type="submit" className="w-full mt-6" isPending={form.isPending}>
+          <Button
+            type="submit"
+            className="w-full mt-6"
+            isPending={form.isPending}
+          >
             Salvar
           </Button>
         </div>
