@@ -14,11 +14,8 @@ type Response = BankAccount;
 
 export const edit = async ({ id, ...params }: Params): Promise<Response> => {
   const data = await httpClient
-    .put("bank-accounts", {
+    .put(`bank-accounts/${id}`, {
       json: params,
-      searchParams: {
-        id
-      }
     })
     .json<Response>();
 
