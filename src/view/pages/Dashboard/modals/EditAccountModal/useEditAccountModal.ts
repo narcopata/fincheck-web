@@ -81,7 +81,7 @@ export const useEditAccountModal = () => {
       });
 
       queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.BANK_ACCOUNTS_EDIT,
+        queryKey: QUERY_KEYS.BANK_ACCOUNTS_ALL,
       });
 
       toast.success("Conta foi cadastrada com sucesso");
