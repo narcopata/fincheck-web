@@ -22,10 +22,11 @@ export const InputCurrency: FunctionComponent<Props> = ({
           "w-full border bg-white text-gray-900  border-gray-800 text-[32px] font-bold tracking-[-1px] outline-none",
           errorMessage && "text-red-900",
         )}
-        defaultValue={0}
-        onChange={(event: Event) =>
-          onInput?.((event?.currentTarget as HTMLInputElement)?.value)
-        }
+        allowLeadingZeros={false}
+        valueIsNumericString
+        onValueChange={(e) => {
+          onInput?.(e.value);
+        }}
         value={value as string}
       />
 
