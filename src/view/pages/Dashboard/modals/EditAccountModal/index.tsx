@@ -85,7 +85,7 @@ export const EditAccountModal: FunctionComponent = () => {
             )}
           />
 
-          <Button className="w-full mt-6" isPending={form.isPending}>
+          <Button type="submit" className="w-full mt-6" isPending={form.isPending}>
             Salvar
           </Button>
         </div>
