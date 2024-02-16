@@ -22,14 +22,14 @@ export const Fab: FunctionComponent = () => {
 
         <DropDownMenu.Content>
           <DropDownMenu.Item
-            onselect={() => modals.newTransaction.open("income")}
+            onselect={() => modals.newTransaction.open("expense")}
             className="gap-2"
           >
             <CategoryIcon type="expense" />
             Nova Despesa
           </DropDownMenu.Item>
           <DropDownMenu.Item
-            onselect={() => modals.newTransaction.open("expense")}
+            onselect={() => modals.newTransaction.open("income")}
             className="gap-2"
           >
             <CategoryIcon type="income" />
