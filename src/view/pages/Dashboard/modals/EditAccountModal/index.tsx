@@ -5,6 +5,7 @@ import { InputCurrency } from "@components/InputCurrency";
 import { Modal } from "@components/Modal";
 import { Select } from "@components/Select";
 import { BANK_ACCOUNT_TYPES } from "@constants/bankAccountTypes";
+import { currencyStringToNumber } from "@utils/currencyStringToNumber";
 import type { FunctionComponent } from "preact";
 import { Controller } from "react-hook-form";
 import { useEditAccountModal } from "./useEditAccountModal";
@@ -24,12 +25,12 @@ export const EditAccountModal: FunctionComponent = () => {
             <Controller
               name="initialBalance"
               control={form.control}
-              defaultValue="0"
+              defaultValue={0}
               render={({ field: { onChange, value } }) => (
                 <InputCurrency
                   errorMessage={form.errors.initialBalance?.message}
                   onInput={onChange}
-                  value={value}
+                  value={currencyStringToNumber(value)}
                 />
               )}
             />
