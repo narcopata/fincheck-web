@@ -57,7 +57,7 @@ export const useNewAccountModal = () => {
     mutationFn: bankAccountService.create,
   });
 
-  const handleSubmit = hookFormSubmit(async (data) => { 
+  const handleSubmit = hookFormSubmit(async (data) => {
     try {
       if (!data.color) {
         return;

@@ -77,7 +77,7 @@ export const useEditAccountModal = () => {
         ...data,
         initialBalance: currencyStringToNumber(data.initialBalance),
         color: COLORS[data.color].color,
-        id: account.id
+        id: account.id,
       });
 
       queryClient.invalidateQueries({
