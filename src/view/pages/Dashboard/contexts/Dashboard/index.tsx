@@ -60,39 +60,62 @@ const useEditAccountModal = () => {
   return data;
 };
 
+const useNewAccountModal = (): Props["modals"]["newAccount"] => {
+  const [isOpen, setIsOpen] = useState(false);
+  const open = useCallback(() => {
+    setIsOpen(true);
+  }, []);
+
+  const close = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  return {
+    open,
+    isOpen,
+    close,
+  };
+};
+
+const useNewTransactionModal = (): Props["modals"]["newTransaction"] => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [type, setType] = useState<TransactionType | null>(null);
+
+  const open: Props["modals"]["newTransaction"]["open"] = useCallback(
+    (type) => {
+      setType(type);
+      setIsOpen(true);
+    },
+    [],
+  );
+
+  const close: Props["modals"]["newTransaction"]["close"] = useCallback(() => {
+    setType(null);
+    setIsOpen(false);
+  }, []);
+
+  const data = useMemo(
+    () => ({
+      isOpen,
+      type,
+      close,
+      open,
+    }),
+    [isOpen, type, close, open],
+  );
+
+  return data;
+};
+
 export const DashboardProvider: Provider<Props | null> = ({ children }) => {
   const [areValuesVisible, toggleValuesVisibility] = useReducer(
     (s: boolean) => !s,
     true,
   );
 
-  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
-  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] =
-    useState(false);
-  const [newTransactionType, setNewTransactionType] =
-    useState<TransactionType | null>(null);
+  const newAccountModalData = useNewAccountModal();
 
-  const openNewAccountModal: Props["modals"]["newAccount"]["open"] =
-    useCallback(() => {
-      setIsNewAccountModalOpen(true);
-    }, []);
-
-  const closeAccountModal: Props["modals"]["newAccount"]["close"] =
-    useCallback(() => {
-      setIsNewAccountModalOpen(false);
-    }, []);
-
-  const openNewTransactionModal: Props["modals"]["newTransaction"]["open"] =
-    useCallback((type) => {
-      setNewTransactionType(type);
-      setIsNewTransactionModalOpen(true);
-    }, []);
-
-  const closeTransactionModal: Props["modals"]["newTransaction"]["close"] =
-    useCallback(() => {
-      setNewTransactionType(null);
-      setIsNewTransactionModalOpen(false);
-    }, []);
+  const newTransactionModalData = useNewTransactionModal();
 
   const editAccountModalData = useEditAccountModal();
 
@@ -102,31 +125,12 @@ export const DashboardProvider: Provider<Props | null> = ({ children }) => {
       toggleValuesVisibility:
         toggleValuesVisibility as Props["toggleValuesVisibility"],
       modals: {
-        newAccount: {
-          isOpen: isNewAccountModalOpen,
-          close: closeAccountModal,
-          open: openNewAccountModal,
-        },
-        newTransaction: {
-          close: closeTransactionModal,
-          open: openNewTransactionModal,
-          isOpen: isNewTransactionModalOpen,
-          type: newTransactionType,
-        },
+        newAccount: newAccountModalData,
+        newTransaction: newTransactionModalData,
         editAccount: editAccountModalData,
       },
     }),
-    [
-      areValuesVisible,
-      isNewAccountModalOpen,
-      closeAccountModal,
-      openNewAccountModal,
-      closeTransactionModal,
-      openNewTransactionModal,
-      isNewTransactionModalOpen,
-      newTransactionType,
-      editAccountModalData,
-    ],
+    [areValuesVisible, newAccountModalData, editAccountModalData],
   );
 
   return (
