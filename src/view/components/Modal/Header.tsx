@@ -15,6 +15,7 @@ type Props = BaseProps & {
 export const Header: FunctionComponent<Props> = ({
   children,
   onClose: onCloseFromChild,
+  rightAction,
   ...props
 }) => {
   const onClose = useCallback(() => {
@@ -39,7 +40,9 @@ export const Header: FunctionComponent<Props> = ({
           <span className="text-lg tracking-[-1px] font-bold">
             {props.title}
           </span>
-          <div className="w-12 h-12 flex items-center justify-center">RA</div>
+          <div className="w-12 h-12 flex items-center justify-center">
+            {rightAction}
+          </div>
         </>
       )}
     </header>
