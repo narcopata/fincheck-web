@@ -130,7 +130,12 @@ export const DashboardProvider: Provider<Props | null> = ({ children }) => {
         editAccount: editAccountModalData,
       },
     }),
-    [areValuesVisible, newAccountModalData, editAccountModalData],
+    [
+      areValuesVisible,
+      newAccountModalData,
+      editAccountModalData,
+      newTransactionModalData,
+    ],
   );
 
   return (
