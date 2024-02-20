@@ -8,7 +8,7 @@ import { superstructResolver } from "@hookform/resolvers/superstruct";
 import { bankAccountService } from "@services/bankAccounts";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { currencyStringToNumber } from "@utils/currencyStringToNumber";
-import { useMemo } from "preact/hooks";
+import { useCallback, useMemo, useState } from "preact/hooks";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as ss from "superstruct";
@@ -38,19 +38,55 @@ const schema = ss.object({
 
 type FormDataType = ss.Infer<typeof schema>;
 
+const useConfirmDeleteModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const open = useCallback(() => {
+    setIsOpen(true);
+  }, []);
+
+  const close = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  const data = useMemo(
+    () => ({
+      isOpen,
+      open,
+      close,
+    }),
+    [isOpen, open, close],
+  );
+
+  return data;
+};
+
 export const useEditAccountModal = () => {
   const { modals } = useDashboard();
 
+  /*   const {
+    editAccount: { account },
+  } = modals; */
+
+  const confirmDeleteModalData = useConfirmDeleteModal();
+
+  const modalsData = useMemo(
+    () => ({
+      ...modals,
+      confirmDelete: confirmDeleteModalData,
+    }),
+    [modals, confirmDeleteModalData],
+  );
+
   const {
     editAccount: { account },
-  } = modals;
+  } = modalsData;
 
   const {
     register,
     formState: { errors },
     handleSubmit: hookFormSubmit,
     control,
-    reset,
   } = useForm<FormDataType>({
     resolver: superstructResolver(schema),
     defaultValues: {
@@ -63,8 +99,12 @@ export const useEditAccountModal = () => {
 
   const queryClient = useQueryClient();
 
-  const { mutateAsync, isPending } = useMutation({
+  const updateBankAccountMutation = useMutation({
     mutationFn: bankAccountService.edit,
+  });
+
+  const deleteBanAccountMutation = useMutation({
+    mutationFn: bankAccountService.delete,
   });
 
   const handleSubmit = hookFormSubmit(async (data) => {
@@ -73,7 +113,7 @@ export const useEditAccountModal = () => {
         return;
       }
 
-      await mutateAsync({
+      await updateBankAccountMutation.mutateAsync({
         ...data,
         initialBalance: currencyStringToNumber(data.initialBalance),
         color: COLORS[data.color].color,
@@ -84,29 +124,59 @@ export const useEditAccountModal = () => {
         queryKey: QUERY_KEYS.BANK_ACCOUNTS_ALL,
       });
 
-      toast.success("Conta foi cadastrada com sucesso");
+      toast.success("Conta foi editada com sucesso.");
 
       modals.editAccount.close();
-
-      reset();
     } catch {
-      toast.error("Erro ao cadastrar a conta.");
+      toast.error("Erro ao salvar as alterações.");
     }
   });
+
+  const handleDeleteAccount = useCallback(async () => {
+    try {
+      if (!account?.id) {
+        return;
+      }
+
+      await deleteBanAccountMutation.mutateAsync(account?.id);
+
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.BANK_ACCOUNTS_ALL,
+      });
+
+      toast.success("A conta foi excluída com sucesso.");
+
+      modals.editAccount.close();
+    } catch {
+      toast.error("Erro ao excluir conta.");
+    }
+  }, [deleteBanAccountMutation, modals.editAccount.close, queryClient]);
 
   const form = useMemo(
     () => ({
       register,
       errors,
-      handleSubmit,
-      isPending,
+      handleSubmit: {
+        edit: handleSubmit,
+        delete: handleDeleteAccount,
+      },
+      isPending: updateBankAccountMutation.isPending,
+      isDeletePending: deleteBanAccountMutation.isPending,
       control,
     }),
-    [register, errors, handleSubmit, control, isPending],
+    [
+      register,
+      errors,
+      handleSubmit,
+      handleDeleteAccount,
+      control,
+      updateBankAccountMutation.isPending,
+      deleteBanAccountMutation.isPending,
+    ],
   );
 
   return {
-    modals,
+    modals: modalsData,
     form,
   };
 };

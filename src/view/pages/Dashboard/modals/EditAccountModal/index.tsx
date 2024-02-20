@@ -7,16 +7,39 @@ import { Select } from "@components/Select";
 import { BANK_ACCOUNT_TYPES } from "@constants/bankAccountTypes";
 import type { FunctionComponent } from "preact";
 import { Controller } from "react-hook-form";
+import { TrashIcon } from "../../components/icons/TrashIcon";
+import { ConfirmDeleteModal } from "../ConfirmDeleteModal";
 import { useEditAccountModal } from "./useEditAccountModal";
 
 export const EditAccountModal: FunctionComponent = () => {
   const { modals, form } = useEditAccountModal();
 
+  if (modals.confirmDelete.isOpen) {
+    return (
+      <ConfirmDeleteModal
+        title="Tem certeza que deseja excluir esta conta?"
+        onConfirm={form.handleSubmit.delete}
+        onClose={modals.confirmDelete.close}
+        description="Ao excluir a conta, também serão excluídos todos os registros da
+      receita e despesas relacionados."
+        isPending={form.isDeletePending}
+      />
+    );
+  }
+
   return (
     <Modal.Root open={modals.editAccount.isOpen}>
-      <Modal.Header title="Editar Conta" onClose={modals.editAccount.close} />
+      <Modal.Header
+        rightAction={
+          <button onClick={modals.confirmDelete.open} type="button">
+            <TrashIcon className="w-6 h-6 text-red-900" />
+          </button>
+        }
+        title="Editar Conta"
+        onClose={modals.editAccount.close}
+      />
 
-      <form onSubmit={form.handleSubmit}>
+      <form onSubmit={form.handleSubmit.edit}>
         <div>
           <span className="text-gray-600 tracking-[-0.5px] text-xs">Saldo</span>
           <div className="flex items-center gap-2">
