@@ -84,7 +84,11 @@ export const NewAccountModal: FunctionComponent = () => {
             )}
           />
 
-          <Button type="submit" className="w-full mt-6" isPending={form.isPending}>
+          <Button
+            type="submit"
+            className="w-full mt-6"
+            isPending={form.isPending}
+          >
             Criar
           </Button>
         </div>
