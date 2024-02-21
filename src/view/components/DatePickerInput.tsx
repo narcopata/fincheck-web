@@ -1,21 +1,31 @@
-import { DatePicker } from "@components/DatePicker";
+import { DatePicker, type DatePickerProps } from "@components/DatePicker";
 import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { cn } from "@utils/cn";
 import { formatDate } from "@utils/formatDate";
 import type { FunctionComponent } from "preact";
-import { useState } from "preact/hooks";
+import { useCallback, useState } from "preact/hooks";
 import { Popover } from "./Popover";
 
 type Props = {
   errorMessage?: string;
   className?: string;
-};
+} & Partial<DatePickerProps>;
 
 export const DatePickerInput: FunctionComponent<Props> = ({
   className,
   errorMessage,
+  value,
+  onInput,
 }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(value ?? new Date());
+
+  const handleSelect = useCallback(
+    (value: Date) => {
+      setSelectedDate(value);
+      onInput?.(value);
+    },
+    [onInput],
+  );
 
   return (
     <div>
@@ -39,10 +49,7 @@ export const DatePickerInput: FunctionComponent<Props> = ({
         </Popover.Trigger>
 
         <Popover.Content>
-          <DatePicker
-            value={selectedDate}
-            onInput={(date) => setSelectedDate(date)}
-          />
+          <DatePicker value={selectedDate} onInput={handleSelect} />
         </Popover.Content>
       </Popover.Root>
       {errorMessage && (

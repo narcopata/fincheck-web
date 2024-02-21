@@ -4,12 +4,15 @@ import { ptBR } from "date-fns/locale";
 import type { FunctionComponent } from "preact";
 import { DayPicker } from "react-day-picker";
 
-type Props = {
+export type DatePickerProps = {
   value: Date;
   onInput?: (date: Date) => void;
 };
 
-export const DatePicker: FunctionComponent<Props> = ({ value, onInput }) => {
+export const DatePicker: FunctionComponent<DatePickerProps> = ({
+  value,
+  onInput,
+}) => {
   return (
     <DayPicker
       locale={ptBR}
