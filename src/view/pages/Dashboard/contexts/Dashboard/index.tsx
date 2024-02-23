@@ -1,8 +1,7 @@
 import type { ColorKey } from "@constants/colors";
+import type { BankAccount } from "@entities/BankAccount";
 import { type Provider, createContext } from "preact";
 import { useCallback, useMemo, useReducer, useState } from "preact/hooks";
-import type { BankAccount } from "../../../../../app/entities/BankAccount";
-
 type TransactionType = "income" | "expense";
 
 type ModalBankAccount = Omit<BankAccount, "color"> & Record<"color", ColorKey>;

@@ -1,6 +1,6 @@
+import { useAuthContext } from "@contexts/AuthContext";
 import type { VNode } from "preact";
 import { Route, type RouteProps, useLocation } from "preact-iso";
-import { useAuthContext } from "../app/contexts/AuthContext";
 
 export function ProtectedRoute<Props>({
   isPrivate = false,

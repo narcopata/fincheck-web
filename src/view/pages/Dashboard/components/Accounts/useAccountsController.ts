@@ -1,8 +1,8 @@
 import { QUERY_KEYS } from "@config/queryKeys";
+import { useWindowWidth } from "@hooks/useWindowWidth";
 import { bankAccountService } from "@services/bankAccounts";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "preact/hooks";
-import { useWindowWidth } from "../../../../../app/hooks/useWindowWidth";
 import { useDashboard } from "../../contexts/Dashboard/useDashboard";
 
 export const useAccountsController = () => {

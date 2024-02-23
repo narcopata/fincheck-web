@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 
 import isEmail from "is-email";
 
+import { useAuthContext } from "@contexts/AuthContext";
 import { authService } from "@services/auth";
 import type { SignInParams } from "@services/auth/signin";
 import { useMutation } from "@tanstack/react-query";
 import { message } from "@utils/message";
 import toast from "react-hot-toast";
 import * as s from "superstruct";
-import { useAuthContext } from "../../../app/contexts/AuthContext";
 
 const email = () =>
   s.refine(

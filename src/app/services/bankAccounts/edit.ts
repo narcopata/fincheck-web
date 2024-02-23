@@ -1,6 +1,6 @@
 import type { BankAccountType } from "@constants/bankAccountTypes";
+import type { BankAccount } from "@entities/BankAccount";
 import { httpClient } from "@services/httpClient";
-import type { BankAccount } from "../../entities/BankAccount";
 
 type Params = {
   id: string;

@@ -1,8 +1,8 @@
 import type { ColorKey } from "@constants/colors";
+import type { BankAccount } from "@entities/BankAccount";
 import { cn } from "@utils/cn";
 import { formatCurrency } from "@utils/formatCurrency";
 import type { FunctionComponent } from "preact";
-import type { BankAccount } from "../../../../../app/entities/BankAccount";
 import { useDashboard } from "../../contexts/Dashboard/useDashboard";
 import { BankAccountTypeIcon } from "../icons/BankAccountTypeIcon";
 

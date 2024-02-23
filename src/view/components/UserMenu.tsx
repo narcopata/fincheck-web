@@ -1,5 +1,5 @@
 import { ExitIcon } from "@assets/icons/radix-icons";
-import { useAuthContext } from "../../app/contexts/AuthContext";
+import { useAuthContext } from "@contexts/AuthContext";
 import { DropDownMenu } from "./DropdownMenu";
 
 export const UserMenu = () => {
