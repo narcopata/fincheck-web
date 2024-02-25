@@ -26,6 +26,10 @@ export const useFiltersModal = () => {
             ? null
             : action.set.bankAccountId;
       } else {
+        if (!newState.year) {
+          return newState;
+        }
+
         newState.year =
           action.set.year.type === "increment"
             ? newState.year + 1
