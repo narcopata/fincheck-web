@@ -5,8 +5,10 @@ import { Spinner } from "@components/Spinner";
 import { MONTHS } from "@constants/months";
 import { cn } from "@utils/cn";
 import { formatCurrency } from "@utils/formatCurrency";
-import { useMemo } from "preact/hooks";
+import { useEffect, useMemo } from "preact/hooks";
 
+import { TRANSACTION_TYPES } from "@constants/transactionTypes";
+import { formatDate } from "@utils/formatDate";
 import { FilterIcon } from "../icons/FilterIcon";
 import { CategoryIcon } from "../icons/categories/CategoryIcon";
 import { FiltersModal } from "./FiltersModal";
@@ -24,6 +26,9 @@ export const Transactions = () => {
     isFiltersModalOpen,
     handleOpenFiltersModal,
     handleCloseFiltersModal,
+    filtersDispatch,
+    filters,
+    refetch: refetchTransactions,
   } = useTransactionsController();
 
   const hasTransactions = useMemo(
@@ -31,11 +36,23 @@ export const Transactions = () => {
     [transactions.length],
   );
 
+  useEffect(() => {
+    refetchTransactions();
+  }, [refetchTransactions, filters]);
+
   return (
     <div className="bg-gray-100 rounded-2xl w-full h-full p-10 flex flex-col">
       <FiltersModal
         open={isFiltersModalOpen}
         onClose={handleCloseFiltersModal}
+        onApplyFilters={
+          (filters) => filtersDispatch({
+            set: {
+              bankAccountId: filters.bankAccountId ?? undefined,
+              year: filters.year ?? undefined,
+            }
+          })
+        }
       />
       {isFirstLoading && (
         <div className="w-full h-full flex items-center justify-center">
@@ -46,7 +63,16 @@ export const Transactions = () => {
         <>
           <header>
             <div className="flex items-center justify-between">
-              <TransactionTypeDropdown />
+              <TransactionTypeDropdown
+                onSelect={(type) => {
+                  filtersDispatch({
+                    set: {
+                      type: type === "all" ? undefined : type,
+                    },
+                  });
+                }}
+                selectedType={filters.type || "all"}
+              />
 
               <button onClick={handleOpenFiltersModal} type="button">
                 <FilterIcon />
@@ -54,7 +80,22 @@ export const Transactions = () => {
             </div>
 
             <div className="mt-6 relative">
-              <Swiper slidesPerView={3} centeredSlides>
+              <Swiper
+                initialSlide={filters.month}
+                slidesPerView={3}
+                centeredSlides
+                onSlideChange={(swiper) => {
+                  if (swiper.realIndex === filters.month) {
+                    return;
+                  }
+
+                  filtersDispatch({
+                    set: {
+                      month: swiper.realIndex,
+                    },
+                  });
+                }}
+              >
                 <SliderNavigation />
 
                 {Object.values(MONTHS).map((month, index) => (
@@ -86,53 +127,43 @@ export const Transactions = () => {
                 )}
               </div>
             )}
-            {hasTransactions && !isNextLoading && (
-              <>
-                <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+            {hasTransactions &&
+              !isNextLoading &&
+              transactions.map((transaction) => (
+                <div
+                  key={transaction.id}
+                  className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4"
+                >
                   <div className="flex-1 flex items-center">
-                    <CategoryIcon type="expense" />
+                    <CategoryIcon
+                      type={transaction.type}
+                      category={transaction.category?.icon}
+                    />
 
                     <div>
                       <strong className="font-bold tracking-[-0.5px] block">
-                        Almoço
+                        {transaction.name}
                       </strong>
-                      <span className="text-sm text-gray-600">04/06/2023</span>
+                      <span className="text-sm text-gray-600">
+                        {formatDate(new Date(transaction.date))}
+                      </span>
                     </div>
                   </div>
 
                   <span
                     className={cn(
                       "tracking-[-0.5px] font-medium",
+                      transaction.type === TRANSACTION_TYPES.EXPENSE
+                        ? "text-red-800"
+                        : "text-green-800",
                       !areValuesVisible && "blur-sm",
                     )}
                   >
-                    - {formatCurrency(123)}
+                    {transaction.type === TRANSACTION_TYPES.EXPENSE ? "-" : "+"}{" "}
+                    {formatCurrency(transaction.value)}
                   </span>
                 </div>
-
-                <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
-                  <div className="flex-1 flex items-center">
-                    <CategoryIcon type="income" />
-
-                    <div>
-                      <strong className="font-bold tracking-[-0.5px] block">
-                        Almoço
-                      </strong>
-                      <span className="text-sm text-gray-600">04/06/2023</span>
-                    </div>
-                  </div>
-
-                  <span
-                    className={cn(
-                      "tracking-[-0.5px] font-medium",
-                      !areValuesVisible && "blur-sm",
-                    )}
-                  >
-                    {formatCurrency(123)}
-                  </span>
-                </div>
-              </>
-            )}
+              ))}
           </main>
         </>
       )}
