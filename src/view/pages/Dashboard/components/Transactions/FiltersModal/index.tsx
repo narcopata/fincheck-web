@@ -9,14 +9,19 @@ import { cn } from "@utils/cn";
 import type { FunctionComponent } from "preact";
 import { useFiltersModal } from "./useFiltersModalController";
 
-type Props = Omit<ModalRootProps & ModalHeaderProps, "title">;
+type Props = Omit<ModalRootProps & ModalHeaderProps, "title"> & {
+  onApplyFilters: (filters: {
+    bankAccountId: string | null;
+    year: number | null;
+  }) => void;
+};
 
-const accounts = new Set<{ id: string; title: string }>();
-
-accounts.add({ title: "Nu", id: "100" });
-
-export const FiltersModal: FunctionComponent<Props> = ({ open, onClose }) => {
-  const { filtersData, dispatchFilters } = useFiltersModal();
+export const FiltersModal: FunctionComponent<Props> = ({
+  open,
+  onClose,
+  onApplyFilters,
+}) => {
+  const { filtersData, dispatchFilters, accounts } = useFiltersModal();
 
   return (
     <Modal.Root open={open}>
@@ -27,20 +32,20 @@ export const FiltersModal: FunctionComponent<Props> = ({ open, onClose }) => {
         </span>
 
         <div className="space-y-2 mt-2">
-          {Array.from(accounts).map((value) => (
+          {accounts.map((account) => (
             <button
-              key={value.id}
+              key={account.id}
               type="button"
               onClick={() =>
-                dispatchFilters({ set: { bankAccountId: value.id } })
+                dispatchFilters({ set: { bankAccountId: account.id } })
               }
               className={cn(
                 "p-2 rounded-2xl w-full text-left text-gray-800 hover:bg-gray-50 transition-colors",
-                value.id === ("100" || filtersData.bankAccountId) &&
+                account.id === ("100" || filtersData.bankAccountId) &&
                   "!bg-gray-200",
               )}
             >
-              {value.title}
+              {account.name}
             </button>
           ))}
         </div>
@@ -92,7 +97,16 @@ export const FiltersModal: FunctionComponent<Props> = ({ open, onClose }) => {
         </div>
       </div>
 
-      <Button className="w-full mt-10">Aplicar Filtros</Button>
+      <Button
+        className="w-full mt-10"
+        onClick={() =>
+          onApplyFilters({
+            ...filtersData,
+          })
+        }
+      >
+        Aplicar Filtros
+      </Button>
     </Modal.Root>
   );
 };
