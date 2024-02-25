@@ -1,7 +1,21 @@
+import type { TransactionType } from "@constants/transactionTypes";
 import { httpClient } from "@services/httpClient";
 
-export const create = async () => {
-  const data = await httpClient.post("transaction");
+type Params = {
+  bankAccountId: string;
+  categoryId: string;
+  name: string;
+  value: number;
+  date: string;
+  type: TransactionType;
+};
+
+export const create = async (params: Params) => {
+  const data = await httpClient
+    .post("transactions", {
+      json: params,
+    })
+    .json();
 
   return data;
 };
