@@ -1,5 +1,6 @@
 import { PlusIcon } from "@assets/icons/radix-icons";
 import { DropDownMenu } from "@components/DropdownMenu";
+import { TRANSACTION_TYPES } from "@constants/transactionTypes";
 import type { FunctionComponent } from "preact";
 import { useDashboard } from "../../contexts/Dashboard/useDashboard";
 import { BankAccountIcon } from "../icons/BankAccountIcon";
@@ -22,17 +23,21 @@ export const Fab: FunctionComponent = () => {
 
         <DropDownMenu.Content>
           <DropDownMenu.Item
-            onselect={() => modals.newTransaction.open("expense")}
+            onselect={() =>
+              modals.newTransaction.open(TRANSACTION_TYPES.EXPENSE)
+            }
             className="gap-2"
           >
-            <CategoryIcon type="expense" />
+            <CategoryIcon type={TRANSACTION_TYPES.EXPENSE} />
             Nova Despesa
           </DropDownMenu.Item>
           <DropDownMenu.Item
-            onselect={() => modals.newTransaction.open("income")}
+            onselect={() =>
+              modals.newTransaction.open(TRANSACTION_TYPES.INCOME)
+            }
             className="gap-2"
           >
-            <CategoryIcon type="income" />
+            <CategoryIcon type={TRANSACTION_TYPES.INCOME} />
             Nova Receita
           </DropDownMenu.Item>
           <DropDownMenu.Item
