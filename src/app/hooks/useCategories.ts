@@ -3,13 +3,13 @@ import { categoriesService } from "@services/categories";
 import { useQuery } from "@tanstack/react-query";
 
 export const useCategories = () => {
-  const { data, isFetching } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: QUERY_KEYS.CATEGORIES_GET_ALL,
     queryFn: categoriesService.getAll,
   });
 
   return {
     categories: data ?? [],
-    isFetching,
+    isPending,
   };
 };
