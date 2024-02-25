@@ -1,6 +1,8 @@
+import type { TransactionType } from "@constants/transactionTypes";
+
 export type Category = {
   id: string;
   name: string;
   icon: string;
-  type: "income" | "expense";
+  type: TransactionType;
 };
