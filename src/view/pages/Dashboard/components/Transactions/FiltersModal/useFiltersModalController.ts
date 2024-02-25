@@ -19,7 +19,7 @@ type Action = {
 export const useFiltersModal = () => {
   const [filtersData, dispatchFilters] = useReducer<State, Action>(
     (prevState, action) => {
-      const newState = structuredClone(prevState);
+      const newState = { ...prevState };
 
       if (("bankAccountId" satisfies keyof State) in action.set) {
         newState.bankAccountId =
@@ -42,7 +42,7 @@ export const useFiltersModal = () => {
     {
       bankAccountId: null,
       year: new Date().getFullYear(),
-    } satisfies State,
+    },
   );
 
   const [selectedBankAccountId, dispatchSelectedBankAccountId] = useReducer(
