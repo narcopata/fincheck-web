@@ -1,3 +1,4 @@
+import { useBankAccount } from "@hooks/useBankAccount";
 import { useReducer } from "preact/hooks";
 
 type State = {
@@ -51,10 +52,13 @@ export const useFiltersModal = () => {
     null,
   );
 
+  const { accounts } = useBankAccount();
+
   return {
     selectedBankAccountId,
     dispatchSelectedBankAccountId,
     filtersData,
     dispatchFilters,
+    accounts,
   };
 };
