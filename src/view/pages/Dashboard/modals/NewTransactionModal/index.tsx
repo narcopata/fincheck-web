@@ -71,7 +71,7 @@ export const NewTransactionModal = () => {
             control={form.control}
             render={({ field: { onChange, value } }) => (
               <Select
-                placeholder={isTypeIncome ? "Pagar com" : "Receber em"}
+                placeholder={isTypeIncome ? "Receber em" : "Pagar com"}
                 onInput={onChange}
                 value={value}
                 options={bankAccountsData.accounts.map(({ id, name }) => ({
