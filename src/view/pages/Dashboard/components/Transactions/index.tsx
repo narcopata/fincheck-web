@@ -81,7 +81,7 @@ export const Transactions = () => {
 
             <div className="mt-6 relative">
               <Swiper
-                initialSlide={filters.month}
+                initialSlide={filters.month - 1}
                 slidesPerView={3}
                 centeredSlides
                 onSlideChange={(swiper) => {
