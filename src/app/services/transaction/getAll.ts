@@ -10,9 +10,22 @@ type Params = {
 };
 
 export const getAll = async (queryParams: Params) => {
+  const cleanedQueryParams = (
+    Object.keys(queryParams) as (keyof Params)[]
+  ).reduce((acc, currentEntry) => {
+    const valueFromCurrentKey = queryParams[currentEntry];
+
+    if (valueFromCurrentKey !== undefined) {
+      (acc as Record<keyof Params, unknown>)[currentEntry] =
+        valueFromCurrentKey;
+    }
+
+    return acc;
+  }, {} as Params);
+
   const data = await httpClient
     .get("transactions", {
-      searchParams: queryParams,
+      searchParams: cleanedQueryParams,
     })
     .json<Transaction[]>();
 
