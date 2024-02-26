@@ -41,8 +41,7 @@ export const FiltersModal: FunctionComponent<Props> = ({
               }
               className={cn(
                 "p-2 rounded-2xl w-full text-left text-gray-800 hover:bg-gray-50 transition-colors",
-                account.id === ("100" || filtersData.bankAccountId) &&
-                  "!bg-gray-200",
+                account.id === filtersData.bankAccountId && "!bg-gray-200",
               )}
             >
               {account.name}
