@@ -45,14 +45,16 @@ export const Transactions = () => {
       <FiltersModal
         open={isFiltersModalOpen}
         onClose={handleCloseFiltersModal}
-        onApplyFilters={
-          (filters) => filtersDispatch({
+        onApplyFilters={(filters) => {
+          filtersDispatch({
             set: {
               bankAccountId: filters.bankAccountId ?? undefined,
               year: filters.year ?? undefined,
-            }
-          })
-        }
+            },
+          });
+
+          handleCloseFiltersModal();
+        }}
       />
       {isFirstLoading && (
         <div className="w-full h-full flex items-center justify-center">
