@@ -134,14 +134,14 @@ export const Transactions = () => {
                   key={transaction.id}
                   className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4"
                 >
-                  <div className="flex-1 flex items-center">
+                  <div className="flex-1 flex items-center gap-3">
                     <CategoryIcon
                       type={transaction.type}
                       category={transaction.category?.icon}
                     />
 
                     <div>
-                      <strong className="font-bold tracking-[-0.5px] block">
+                      <strong className="font-bold text-gray-800 tracking-[-0.5px] block">
                         {transaction.name}
                       </strong>
                       <span className="text-sm text-gray-600">
