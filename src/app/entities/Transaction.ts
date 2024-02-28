@@ -7,6 +7,7 @@ export type Transaction = {
     name: string;
     icon: string;
   };
+  bankAccountId: string;
   name: string;
   value: number;
   date: string | Date;
