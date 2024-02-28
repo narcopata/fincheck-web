@@ -9,6 +9,7 @@ import { useEffect, useMemo } from "preact/hooks";
 
 import { TRANSACTION_TYPES } from "@constants/transactionTypes";
 import { formatDate } from "@utils/formatDate";
+import { EditTransactionModal } from "../../modals/EditTransactionModal";
 import { FilterIcon } from "../icons/FilterIcon";
 import { CategoryIcon } from "../icons/categories/CategoryIcon";
 import { FiltersModal } from "./FiltersModal";
@@ -23,9 +24,10 @@ export const Transactions = () => {
     isFirstLoading,
     isNextLoading,
     transactions,
-    isFiltersModalOpen,
-    handleOpenFiltersModal,
-    handleCloseFiltersModal,
+
+    editModal,
+    filtersModal,
+
     filtersDispatch,
     filters,
     refetch: refetchTransactions,
@@ -43,8 +45,8 @@ export const Transactions = () => {
   return (
     <div className="bg-gray-100 rounded-2xl w-full h-full p-10 flex flex-col">
       <FiltersModal
-        open={isFiltersModalOpen}
-        onClose={handleCloseFiltersModal}
+        open={filtersModal.isOpen}
+        onClose={filtersModal.close}
         onApplyFilters={(filters) => {
           filtersDispatch({
             set: {
@@ -53,7 +55,7 @@ export const Transactions = () => {
             },
           });
 
-          handleCloseFiltersModal();
+          filtersModal.close();
         }}
       />
       {isFirstLoading && (
@@ -76,7 +78,7 @@ export const Transactions = () => {
                 selectedType={filters.type || "all"}
               />
 
-              <button onClick={handleOpenFiltersModal} type="button">
+              <button onClick={filtersModal.open} type="button">
                 <FilterIcon />
               </button>
             </div>
@@ -129,43 +131,58 @@ export const Transactions = () => {
                 )}
               </div>
             )}
-            {hasTransactions &&
-              !isNextLoading &&
-              transactions.map((transaction) => (
-                <div
-                  key={transaction.id}
-                  className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4"
-                >
-                  <div className="flex-1 flex items-center gap-3">
-                    <CategoryIcon
-                      type={transaction.type}
-                      category={transaction.category?.icon}
-                    />
+            {hasTransactions && !isNextLoading && (
+              <>
+                {editModal.transaction && (
+                  <EditTransactionModal
+                    isOpen={editModal.isOpen}
+                    onClose={editModal.close}
+                    transaction={editModal.transaction}
+                  />
+                )}
 
-                    <div>
-                      <strong className="font-bold text-gray-800 tracking-[-0.5px] block">
-                        {transaction.name}
-                      </strong>
-                      <span className="text-sm text-gray-600">
-                        {formatDate(new Date(transaction.date))}
-                      </span>
-                    </div>
-                  </div>
-
-                  <span
-                    className={cn(
-                      "tracking-[-0.5px] font-medium",
-                      transaction.type === TRANSACTION_TYPES.EXPENSE
-                        ? "text-red-800"
-                        : "text-green-800",
-                      !areValuesVisible && "blur-sm",
-                    )}
+                {transactions.map((transaction) => (
+                  // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+                  <div
+                    key={transaction.id}
+                    className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4"
+                    role="button"
+                    onClick={() => editModal.open(transaction)}
                   >
-                    {transaction.type === TRANSACTION_TYPES.EXPENSE ? "-" : "+"}{" "}
-                    {formatCurrency(transaction.value)}
-                  </span>
-                </div>
-              ))}
+                    <div className="flex-1 flex items-center gap-3">
+                      <CategoryIcon
+                        type={transaction.type}
+                        category={transaction.category?.icon}
+                      />
+
+                      <div>
+                        <strong className="font-bold text-gray-800 tracking-[-0.5px] block">
+                          {transaction.name}
+                        </strong>
+                        <span className="text-sm text-gray-600">
+                          {formatDate(new Date(transaction.date))}
+                        </span>
+                      </div>
+                    </div>
+
+                    <span
+                      className={cn(
+                        "tracking-[-0.5px] font-medium",
+                        transaction.type === TRANSACTION_TYPES.EXPENSE
+                          ? "text-red-800"
+                          : "text-green-800",
+                        !areValuesVisible && "blur-sm",
+                      )}
+                    >
+                      {transaction.type === TRANSACTION_TYPES.EXPENSE
+                        ? "-"
+                        : "+"}{" "}
+                      {formatCurrency(transaction.value)}
+                    </span>
+                  </div>
+                ))}
+              </>
+            )}
           </main>
         </>
       )}
