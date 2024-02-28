@@ -6,5 +6,6 @@ export const QUERY_KEYS = Object.freeze({
   TRANSACTIONS: Object.freeze({
     CREATE: Object.freeze(["transactions", "create"] as const),
     GET_ALL: Object.freeze(["transactions", "all"] as const),
+    UPDATE: Object.freeze(["transactions", "update"] as const),
   }),
 });
