@@ -9,7 +9,7 @@ import { Controller } from "react-hook-form";
 import { useNewTransactionModal } from "./useNewTransactionModal";
 
 export const NewTransactionModal = () => {
-  const { form, modals, bankAccountsData, categoriesData } =
+  const { form, modals, bankAccountsData, categoriesData, isPending } =
     useNewTransactionModal();
 
   const isTypeIncome = modals.newTransaction.type === TRANSACTION_TYPES.INCOME;
@@ -58,6 +58,7 @@ export const NewTransactionModal = () => {
                 placeholder="Tipo"
                 onInput={onChange}
                 value={value}
+                errorMessage={form.errors.categoryId?.message}
                 options={categoriesData.categories.map((category) => ({
                   label: category.name,
                   value: category.id,
@@ -74,6 +75,7 @@ export const NewTransactionModal = () => {
                 placeholder={isTypeIncome ? "Receber em" : "Pagar com"}
                 onInput={onChange}
                 value={value}
+                errorMessage={form.errors.bankAccountId?.message}
                 options={bankAccountsData.accounts.map(({ id, name }) => ({
                   label: name,
                   value: id,
@@ -94,8 +96,8 @@ export const NewTransactionModal = () => {
             )}
           />
 
-          <Button type="submit" className="w-full mt-6">
-            Salvar
+          <Button type="submit" className="w-full mt-6" isPending={isPending}>
+            Criar
           </Button>
         </div>
       </form>
