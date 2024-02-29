@@ -6,6 +6,7 @@ export const useBankAccount = () => {
   const { data = [], isPending } = useQuery({
     queryKey: QUERY_KEYS.BANK_ACCOUNTS_ALL,
     queryFn: bankAccountService.getAll,
+    staleTime: Infinity,
   });
 
   return {
