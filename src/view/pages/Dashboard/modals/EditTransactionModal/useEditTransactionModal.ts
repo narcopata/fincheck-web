@@ -1,11 +1,13 @@
 import { QUERY_KEYS } from "@config/queryKeys";
+import { TRANSACTION_TYPES } from "@constants/transactionTypes";
+import type { Transaction } from "@entities/Transaction";
 import { superstructResolver } from "@hookform/resolvers/superstruct";
 import { useBankAccount } from "@hooks/useBankAccount";
 import { useCategories } from "@hooks/useCategories";
 import { transactionService } from "@services/transaction";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { message } from "@utils/message";
-import { useMemo } from "preact/hooks";
+import { useCallback, useMemo, useState } from "preact/hooks";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as ss from "superstruct";
@@ -34,6 +36,78 @@ type FormDataType = ss.Infer<typeof schema>;
 
 type Params = Pick<EditTransactionModalProps, "transaction" | "onClose">;
 
+const useDeleteTransactionModal = (
+  transaction: Transaction | null,
+  onClose: () => void,
+) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const open = useCallback(() => {
+    setIsOpen(true);
+  }, []);
+
+  const close = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  const deleteTransactionMutation = useMutation({
+    mutationFn: transactionService.remove,
+  });
+
+  const queryClient = useQueryClient();
+
+  const deleteTransaction = useCallback(async () => {
+    if (!transaction?.id) {
+      return;
+    }
+
+    try {
+      await deleteTransactionMutation.mutateAsync(transaction.id);
+
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.TRANSACTIONS.GET_ALL,
+      });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.BANK_ACCOUNTS_ALL,
+      });
+
+      toast.success(
+        transaction.type === TRANSACTION_TYPES.EXPENSE
+          ? "A despesa foi removida com sucesso"
+          : "A receita foi removida com sucesso",
+      );
+
+      close();
+      onClose();
+    } catch {
+      toast.error(
+        `Erro ao deletar a ${
+          transaction.type === TRANSACTION_TYPES.EXPENSE ? "despesa" : "receita"
+        }!`,
+      );
+    }
+  }, [deleteTransactionMutation.mutateAsync, close, onClose]);
+
+  const data = useMemo(
+    () => ({
+      isOpen,
+      isPending: deleteTransactionMutation.isPending,
+      open,
+      close,
+      delete: deleteTransaction,
+    }),
+    [
+      isOpen,
+      deleteTransactionMutation.isPending,
+      open,
+      close,
+      deleteTransaction,
+    ],
+  );
+
+  return data;
+};
+
 export const useEditTransactionModal = ({ transaction, onClose }: Params) => {
   const {
     control,
@@ -51,6 +125,11 @@ export const useEditTransactionModal = ({ transaction, onClose }: Params) => {
       date: transaction?.date ? new Date(transaction.date) : new Date(),
     },
   });
+
+  const deleteTransactionModalData = useDeleteTransactionModal(
+    transaction,
+    onClose,
+  );
 
   const updateAccountMutation = useMutation({
     mutationFn: transactionService.update,
@@ -128,5 +207,6 @@ export const useEditTransactionModal = ({ transaction, onClose }: Params) => {
     bankAccountsData,
     categoriesData,
     isPending: updateAccountMutation.isPending,
+    deleteTransactionModalData,
   };
 };

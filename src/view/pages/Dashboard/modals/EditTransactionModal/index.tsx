@@ -8,6 +8,8 @@ import { TRANSACTION_TYPES } from "@constants/transactionTypes";
 import type { Transaction } from "@entities/Transaction";
 import type { FunctionComponent } from "preact";
 import { Controller } from "react-hook-form";
+import { TrashIcon } from "../../components/icons/TrashIcon";
+import { ConfirmDeleteModal } from "../ConfirmDeleteModal";
 import { useEditTransactionModal } from "./useEditTransactionModal";
 
 type Props = {
@@ -21,16 +23,39 @@ export const EditTransactionModal: FunctionComponent<Props> = ({
   onClose,
   transaction,
 }) => {
-  const { form, categoriesData, bankAccountsData, isPending } =
-    useEditTransactionModal({ transaction, onClose });
+  const {
+    form,
+    categoriesData,
+    bankAccountsData,
+    isPending,
+    deleteTransactionModalData,
+  } = useEditTransactionModal({ transaction, onClose });
 
   const isTypeIncome = transaction?.type === TRANSACTION_TYPES.INCOME;
+
+  if (deleteTransactionModalData.isOpen) {
+    return (
+      <ConfirmDeleteModal
+        isPending={deleteTransactionModalData.isPending}
+        onClose={deleteTransactionModalData.close}
+        onConfirm={deleteTransactionModalData.delete}
+        title={`Tem certeza que deseja excluir esta ${
+          isTypeIncome ? "receita" : "despesa"
+        } ?`}
+      />
+    );
+  }
 
   return (
     <Modal.Root open={isOpen}>
       <Modal.Header
         title={isTypeIncome ? "Editar Receita" : "Editar Despesa"}
         onClose={onClose}
+        rightAction={
+          <button type="button" onClick={deleteTransactionModalData.open}>
+            <TrashIcon className="w-6 h-6 text-red-900" />
+          </button>
+        }
       />
 
       <form onSubmit={form.handleSubmit}>
