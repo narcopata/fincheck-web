@@ -18,9 +18,16 @@
       "@services/*": ["./src/app/services/*"],
       "@utils/*": ["./src/app/utils/*"],
       "@assets": ["./src/assets"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@hooks/*": ["./src/app/hooks/*"],
+      "@contexts/*": ["./src/app/contexts/*"],
+      "@entities/*": ["./src/app/entities/*"],
     },
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "strict": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "useUnknownInCatchVariables": true,
   },
   "include": ["node_modules/vite/client.d.ts", "**/*"]
 }

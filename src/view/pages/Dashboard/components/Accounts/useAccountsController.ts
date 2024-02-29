@@ -1,10 +1,19 @@
-import { useState } from "preact/hooks";
-import { useWindowWidth } from "../../../../../app/hooks/useWindowWidth";
+import { useBankAccount } from "@hooks/useBankAccount";
+import { useWindowWidth } from "@hooks/useWindowWidth";
+import { useMemo, useState } from "preact/hooks";
 import { useDashboard } from "../../contexts/Dashboard/useDashboard";
 
 export const useAccountsController = () => {
   const windowWidth = useWindowWidth();
   const { areValuesVisible, toggleValuesVisibility, modals } = useDashboard();
+
+  const { accounts, isPending } = useBankAccount();
+
+  const totalCurrentBalance = useMemo(() => {
+    return accounts.reduce((acc, currentAccount) => {
+      return acc + currentAccount.currentBalance;
+    }, 0);
+  }, [accounts]);
 
   const [slider, setSlider] = useState({
     isBeginning: true,
@@ -18,7 +27,8 @@ export const useAccountsController = () => {
     areValuesVisible,
     toggleValuesVisibility,
     modals,
-    isLoading: true,
-    accounts: [],
+    isLoading: isPending,
+    accounts,
+    totalCurrentBalance,
   };
 };

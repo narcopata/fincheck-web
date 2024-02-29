@@ -5,6 +5,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { PlusIcon } from "@assets/icons/radix-icons";
 import { cn } from "@utils/cn";
 
+import { COLORS, type ColorKey, type ColorValue } from "@constants/colors";
+import { formatCurrency } from "@utils/formatCurrency";
 import { EyeIcon } from "../icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
 import { SliderNavigation } from "./SliderNavigation";
@@ -20,7 +22,20 @@ export const Accounts = () => {
     modals,
     isLoading,
     accounts,
+    totalCurrentBalance,
   } = useAccountsController();
+
+  const getColorKeyFromColorValue = (color: ColorValue["color"]): ColorKey => {
+    const tuple = Object.entries(COLORS) as [ColorKey, ColorValue][];
+
+    const key = (
+      tuple.find(([_, v]) => {
+        return v.color === color;
+      }) as (typeof tuple)[number]
+    )[0];
+
+    return key;
+  };
 
   return (
     <div className="bg-teal-900 rounded-2xl w-full h-full md:p-10 px-4 py-8 flex flex-col">
@@ -42,7 +57,7 @@ export const Accounts = () => {
                   !areValuesVisible && "blur-md",
                 )}
               >
-                R$ 1000.00
+                R$ {formatCurrency(totalCurrentBalance)}
               </strong>
               <button
                 type="button"
@@ -98,14 +113,18 @@ export const Accounts = () => {
                   </div>
 
                   <div>
-                    <SwiperSlide>
-                      <AccountCard
-                        name="Nubank"
-                        balance={1000}
-                        color="#612F74"
-                        type="CASH"
-                      />
-                    </SwiperSlide>
+                    {accounts.map((account) => (
+                      <SwiperSlide key={account.id}>
+                        <AccountCard
+                          data={{
+                            ...account,
+                            colorKey: getColorKeyFromColorValue(
+                              account.color as ColorValue["color"],
+                            ),
+                          }}
+                        />
+                      </SwiperSlide>
+                    ))}
                   </div>
                 </Swiper>
               </div>

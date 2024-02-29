@@ -1,37 +1,37 @@
+import type { ColorKey } from "@constants/colors";
+import type { BankAccount } from "@entities/BankAccount";
 import { cn } from "@utils/cn";
 import { formatCurrency } from "@utils/formatCurrency";
 import type { FunctionComponent } from "preact";
 import { useDashboard } from "../../contexts/Dashboard/useDashboard";
 import { BankAccountTypeIcon } from "../icons/BankAccountTypeIcon";
-import type { iconsMap as bankAccountTypesIconsMap } from "../icons/BankAccountTypeIcon/iconsMap";
 
 type Props = {
-  color: string;
-  name: string;
-  balance: number;
-  type: keyof typeof bankAccountTypesIconsMap;
+  data: BankAccount & Record<"colorKey", ColorKey>;
 };
 
 export const AccountCard: FunctionComponent<Props> = ({
-  balance,
-  color,
-  name,
-  type,
+  data: { colorKey, color, ...data },
 }) => {
-  const { areValuesVisible } = useDashboard();
+  const { areValuesVisible, modals } = useDashboard();
 
   return (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
     <div
       className="p-4 bg-white rounded-2xl h-[200px] flex flex-col justify-between border-b-4 border-teal-950"
       style={{
         borderColor: color,
       }}
+      role="button"
+      onClick={() => {
+        modals.editAccount.open({ ...data, color: colorKey });
+      }}
     >
       <div>
-        <BankAccountTypeIcon type={type} />
+        <BankAccountTypeIcon type={data.type} />
 
         <span className="text-gray-800 font-medium tracking-[-0.5px] mt-4 block">
-          {name}
+          {data.name}
         </span>
       </div>
 
@@ -42,7 +42,7 @@ export const AccountCard: FunctionComponent<Props> = ({
             !areValuesVisible && "blur-sm",
           )}
         >
-          {formatCurrency(balance)}
+          {formatCurrency(data.currentBalance)}
         </span>
         <small className="text-gray-600 text-sm">Saldo atual</small>
       </div>

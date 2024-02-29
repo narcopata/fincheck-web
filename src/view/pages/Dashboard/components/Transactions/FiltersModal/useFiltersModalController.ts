@@ -1,3 +1,4 @@
+import { useBankAccount } from "@hooks/useBankAccount";
 import { useReducer } from "preact/hooks";
 
 type State = {
@@ -18,7 +19,7 @@ type Action = {
 export const useFiltersModal = () => {
   const [filtersData, dispatchFilters] = useReducer<State, Action>(
     (prevState, action) => {
-      const newState = structuredClone(prevState);
+      const newState = { ...prevState };
 
       if (("bankAccountId" satisfies keyof State) in action.set) {
         newState.bankAccountId =
@@ -26,6 +27,10 @@ export const useFiltersModal = () => {
             ? null
             : action.set.bankAccountId;
       } else {
+        if (!newState.year) {
+          return newState;
+        }
+
         newState.year =
           action.set.year.type === "increment"
             ? newState.year + 1
@@ -37,7 +42,7 @@ export const useFiltersModal = () => {
     {
       bankAccountId: null,
       year: new Date().getFullYear(),
-    } satisfies State,
+    },
   );
 
   const [selectedBankAccountId, dispatchSelectedBankAccountId] = useReducer(
@@ -47,10 +52,13 @@ export const useFiltersModal = () => {
     null,
   );
 
+  const { accounts } = useBankAccount();
+
   return {
     selectedBankAccountId,
     dispatchSelectedBankAccountId,
     filtersData,
     dispatchFilters,
+    accounts,
   };
 };

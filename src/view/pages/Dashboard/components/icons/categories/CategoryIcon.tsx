@@ -1,7 +1,8 @@
+import type { TransactionType } from "@constants/transactionTypes";
 import { iconsMap } from "./iconsMap";
 
 interface CategoryIconProps {
-  type: "income" | "expense";
+  type: TransactionType;
   category?: string;
 }
 
