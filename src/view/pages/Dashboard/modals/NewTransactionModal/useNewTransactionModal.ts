@@ -61,6 +61,10 @@ export const useNewTransactionModal = () => {
         queryKey: QUERY_KEYS.TRANSACTIONS.GET_ALL,
       });
 
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.BANK_ACCOUNTS_ALL,
+      });
+
       toast.success(
         modals.newTransaction.type === "expense"
           ? "Despesa cadastrada com sucesso!"
